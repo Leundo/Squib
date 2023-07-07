@@ -7,10 +7,28 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7125C5712A5853E600BBEDE3 /* Storable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7125C5702A5853E600BBEDE3 /* Storable.swift */; };
+		7125C5732A585C3200BBEDE3 /* Plastic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7125C5722A585C3200BBEDE3 /* Plastic.swift */; };
+		7125C5752A585EE400BBEDE3 /* Fluctuating.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7125C5742A585EE400BBEDE3 /* Fluctuating.swift */; };
+		7125C5782A58634B00BBEDE3 /* Storehouse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7125C5772A58634B00BBEDE3 /* Storehouse.swift */; };
 		718DCD112A57CD7C005D4414 /* Squib.docc in Sources */ = {isa = PBXBuildFile; fileRef = 718DCD102A57CD7C005D4414 /* Squib.docc */; };
 		718DCD172A57CD7C005D4414 /* Squib.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 718DCD0C2A57CD7C005D4414 /* Squib.framework */; };
 		718DCD1C2A57CD7C005D4414 /* SquibTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 718DCD1B2A57CD7C005D4414 /* SquibTests.swift */; };
 		718DCD1D2A57CD7C005D4414 /* Squib.h in Headers */ = {isa = PBXBuildFile; fileRef = 718DCD0F2A57CD7C005D4414 /* Squib.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		718DCD282A57CF90005D4414 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 718DCD272A57CF8C005D4414 /* libsqlite3.tbd */; };
+		718DCD2B2A57CFBA005D4414 /* Runtime in Frameworks */ = {isa = PBXBuildFile; productRef = 718DCD2A2A57CFBA005D4414 /* Runtime */; };
+		718DCD2D2A57CFF2005D4414 /* SQLiteTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 718DCD2C2A57CFF2005D4414 /* SQLiteTests.swift */; };
+		718DCD302A57D0F6005D4414 /* innate.db in Resources */ = {isa = PBXBuildFile; fileRef = 718DCD2F2A57D0F6005D4414 /* innate.db */; };
+		718DCD372A57DB96005D4414 /* String+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 718DCD362A57DB96005D4414 /* String+.swift */; };
+		718DCD392A57DBAA005D4414 /* Knife.swift in Sources */ = {isa = PBXBuildFile; fileRef = 718DCD382A57DBAA005D4414 /* Knife.swift */; };
+		718DCD3B2A57DC4B005D4414 /* Blob.swift in Sources */ = {isa = PBXBuildFile; fileRef = 718DCD3A2A57DC4B005D4414 /* Blob.swift */; };
+		718DCD3D2A57E7ED005D4414 /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 718DCD3C2A57E7ED005D4414 /* Constant.swift */; };
+		718DCD3F2A57E913005D4414 /* Bindable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 718DCD3E2A57E913005D4414 /* Bindable.swift */; };
+		718DCD412A57E972005D4414 /* Statement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 718DCD402A57E972005D4414 /* Statement.swift */; };
+		718DCD432A57E9D7005D4414 /* Connection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 718DCD422A57E9D7005D4414 /* Connection.swift */; };
+		718DCD452A57EC7E005D4414 /* SquibError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 718DCD442A57EC7E005D4414 /* SquibError.swift */; };
+		718DCD472A57F45F005D4414 /* Proton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 718DCD462A57F45F005D4414 /* Proton.swift */; };
+		718DCD492A580B9F005D4414 /* StatementTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 718DCD482A580B9F005D4414 /* StatementTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -24,11 +42,28 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		7125C5702A5853E600BBEDE3 /* Storable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storable.swift; sourceTree = "<group>"; };
+		7125C5722A585C3200BBEDE3 /* Plastic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Plastic.swift; sourceTree = "<group>"; };
+		7125C5742A585EE400BBEDE3 /* Fluctuating.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fluctuating.swift; sourceTree = "<group>"; };
+		7125C5772A58634B00BBEDE3 /* Storehouse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storehouse.swift; sourceTree = "<group>"; };
 		718DCD0C2A57CD7C005D4414 /* Squib.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Squib.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		718DCD0F2A57CD7C005D4414 /* Squib.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Squib.h; sourceTree = "<group>"; };
 		718DCD102A57CD7C005D4414 /* Squib.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = Squib.docc; sourceTree = "<group>"; };
 		718DCD162A57CD7C005D4414 /* SquibTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SquibTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		718DCD1B2A57CD7C005D4414 /* SquibTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SquibTests.swift; sourceTree = "<group>"; };
+		718DCD272A57CF8C005D4414 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.3.sdk/usr/lib/libsqlite3.tbd; sourceTree = DEVELOPER_DIR; };
+		718DCD2C2A57CFF2005D4414 /* SQLiteTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SQLiteTests.swift; sourceTree = "<group>"; };
+		718DCD2F2A57D0F6005D4414 /* innate.db */ = {isa = PBXFileReference; lastKnownFileType = file; path = innate.db; sourceTree = "<group>"; };
+		718DCD362A57DB96005D4414 /* String+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+.swift"; sourceTree = "<group>"; };
+		718DCD382A57DBAA005D4414 /* Knife.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Knife.swift; sourceTree = "<group>"; };
+		718DCD3A2A57DC4B005D4414 /* Blob.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Blob.swift; sourceTree = "<group>"; };
+		718DCD3C2A57E7ED005D4414 /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
+		718DCD3E2A57E913005D4414 /* Bindable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bindable.swift; sourceTree = "<group>"; };
+		718DCD402A57E972005D4414 /* Statement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Statement.swift; sourceTree = "<group>"; };
+		718DCD422A57E9D7005D4414 /* Connection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Connection.swift; sourceTree = "<group>"; };
+		718DCD442A57EC7E005D4414 /* SquibError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SquibError.swift; sourceTree = "<group>"; };
+		718DCD462A57F45F005D4414 /* Proton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Proton.swift; sourceTree = "<group>"; };
+		718DCD482A580B9F005D4414 /* StatementTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatementTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -36,6 +71,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				718DCD282A57CF90005D4414 /* libsqlite3.tbd in Frameworks */,
+				718DCD2B2A57CFBA005D4414 /* Runtime in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -50,12 +87,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7125C5762A585EED00BBEDE3 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				718DCD3E2A57E913005D4414 /* Bindable.swift */,
+				7125C5742A585EE400BBEDE3 /* Fluctuating.swift */,
+				7125C5722A585C3200BBEDE3 /* Plastic.swift */,
+				7125C5702A5853E600BBEDE3 /* Storable.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
 		718DCD022A57CD7C005D4414 = {
 			isa = PBXGroup;
 			children = (
 				718DCD0E2A57CD7C005D4414 /* Squib */,
 				718DCD1A2A57CD7C005D4414 /* SquibTests */,
 				718DCD0D2A57CD7C005D4414 /* Products */,
+				718DCD262A57CF8C005D4414 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -71,6 +120,10 @@
 		718DCD0E2A57CD7C005D4414 /* Squib */ = {
 			isa = PBXGroup;
 			children = (
+				7125C5762A585EED00BBEDE3 /* Protocols */,
+				718DCD352A57DB8A005D4414 /* Helpers */,
+				718DCD342A57DB83005D4414 /* Extensions */,
+				718DCD312A57DAA3005D4414 /* Models */,
 				718DCD0F2A57CD7C005D4414 /* Squib.h */,
 				718DCD102A57CD7C005D4414 /* Squib.docc */,
 			);
@@ -80,9 +133,58 @@
 		718DCD1A2A57CD7C005D4414 /* SquibTests */ = {
 			isa = PBXGroup;
 			children = (
+				718DCD2E2A57D0CB005D4414 /* Resources */,
 				718DCD1B2A57CD7C005D4414 /* SquibTests.swift */,
+				718DCD2C2A57CFF2005D4414 /* SQLiteTests.swift */,
+				718DCD482A580B9F005D4414 /* StatementTests.swift */,
 			);
 			path = SquibTests;
+			sourceTree = "<group>";
+		};
+		718DCD262A57CF8C005D4414 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				718DCD272A57CF8C005D4414 /* libsqlite3.tbd */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		718DCD2E2A57D0CB005D4414 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				718DCD2F2A57D0F6005D4414 /* innate.db */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		718DCD312A57DAA3005D4414 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				718DCD3A2A57DC4B005D4414 /* Blob.swift */,
+				718DCD402A57E972005D4414 /* Statement.swift */,
+				718DCD422A57E9D7005D4414 /* Connection.swift */,
+				718DCD442A57EC7E005D4414 /* SquibError.swift */,
+				718DCD462A57F45F005D4414 /* Proton.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		718DCD342A57DB83005D4414 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				718DCD362A57DB96005D4414 /* String+.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		718DCD352A57DB8A005D4414 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				718DCD382A57DBAA005D4414 /* Knife.swift */,
+				718DCD3C2A57E7ED005D4414 /* Constant.swift */,
+				7125C5772A58634B00BBEDE3 /* Storehouse.swift */,
+			);
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -113,6 +215,9 @@
 			dependencies = (
 			);
 			name = Squib;
+			packageProductDependencies = (
+				718DCD2A2A57CFBA005D4414 /* Runtime */,
+			);
 			productName = Squib;
 			productReference = 718DCD0C2A57CD7C005D4414 /* Squib.framework */;
 			productType = "com.apple.product-type.framework";
@@ -162,6 +267,9 @@
 				Base,
 			);
 			mainGroup = 718DCD022A57CD7C005D4414;
+			packageReferences = (
+				718DCD292A57CFBA005D4414 /* XCRemoteSwiftPackageReference "Runtime" */,
+			);
 			productRefGroup = 718DCD0D2A57CD7C005D4414 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -184,6 +292,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				718DCD302A57D0F6005D4414 /* innate.db in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -194,7 +303,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				718DCD472A57F45F005D4414 /* Proton.swift in Sources */,
+				718DCD432A57E9D7005D4414 /* Connection.swift in Sources */,
+				718DCD3F2A57E913005D4414 /* Bindable.swift in Sources */,
+				7125C5732A585C3200BBEDE3 /* Plastic.swift in Sources */,
+				718DCD372A57DB96005D4414 /* String+.swift in Sources */,
+				7125C5752A585EE400BBEDE3 /* Fluctuating.swift in Sources */,
+				7125C5782A58634B00BBEDE3 /* Storehouse.swift in Sources */,
+				718DCD3B2A57DC4B005D4414 /* Blob.swift in Sources */,
 				718DCD112A57CD7C005D4414 /* Squib.docc in Sources */,
+				718DCD392A57DBAA005D4414 /* Knife.swift in Sources */,
+				718DCD3D2A57E7ED005D4414 /* Constant.swift in Sources */,
+				7125C5712A5853E600BBEDE3 /* Storable.swift in Sources */,
+				718DCD452A57EC7E005D4414 /* SquibError.swift in Sources */,
+				718DCD412A57E972005D4414 /* Statement.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -202,7 +324,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				718DCD492A580B9F005D4414 /* StatementTests.swift in Sources */,
 				718DCD1C2A57CD7C005D4414 /* SquibTests.swift in Sources */,
+				718DCD2D2A57CFF2005D4414 /* SQLiteTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -268,7 +392,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -325,7 +449,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -402,6 +526,7 @@
 		718DCD242A57CD7C005D4414 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 923Q86W73B;
@@ -418,6 +543,7 @@
 		718DCD252A57CD7C005D4414 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 923Q86W73B;
@@ -462,6 +588,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		718DCD292A57CFBA005D4414 /* XCRemoteSwiftPackageReference "Runtime" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/wickwirew/Runtime.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		718DCD2A2A57CFBA005D4414 /* Runtime */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 718DCD292A57CFBA005D4414 /* XCRemoteSwiftPackageReference "Runtime" */;
+			productName = Runtime;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 718DCD032A57CD7C005D4414 /* Project object */;
 }

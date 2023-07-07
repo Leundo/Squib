@@ -6,6 +6,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#include <sqlite3.h>
 
 //! Project version number for Squib.
 FOUNDATION_EXPORT double SquibVersionNumber;
