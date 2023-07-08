@@ -9,16 +9,16 @@ import Foundation
 
 
 final internal class Knife {
-    internal static func concat(_ strs: [String], delimiter: String) -> String {
+    internal static func concat(_ strs: [String], delimiter: String, head: String = "", end: String = "") -> String {
         if strs.count == 0 {
-            return ""
+            return head + "" + end
         } else if strs.count == 1 {
-            return strs[0]
+            return head + strs[0] + end
         } else {
-            return strs[1..<strs.count].reduce(strs[0]) {
+            return head + strs[1..<strs.count].reduce(strs[0]) {
                 initialResult, nextPartialResult in
                 return initialResult + delimiter + nextPartialResult
-            }
+            } + end
         }
     }
 }

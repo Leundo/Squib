@@ -33,6 +33,22 @@ extension Double: Expressive {
     }
 }
 
+extension Blob: Expressive {
+    public var incantation: String {
+        fatalError("incantation has not been implemented")
+    }
+}
+
+
+extension Optional: Expressive where Wrapped: Expressive {
+    public var incantation: String {
+        if let self = self {
+            return self.incantation
+        }
+        return "NULL"
+    }
+}
+
 
 public enum Canister: Expressive {
     case column(payload: Address.Column)

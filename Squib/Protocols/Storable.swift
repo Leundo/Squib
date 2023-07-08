@@ -8,7 +8,7 @@
 import Foundation
 
 
-public protocol Storable: Bindable, Plastic { }
+public protocol Storable: Bindable, Plastic, Fluctuating { }
 extension Storable {
     public var storedValue: Self { return self }
     public static func from(_ storableValue: (any Storable)?) throws -> Self {
