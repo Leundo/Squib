@@ -79,7 +79,9 @@ extension Tableable {
 }
 
 
-//MARL: - Key
+public protocol Explosive: Tableable, Reflectable, Rebuildable {}
+
+// MARK: - Key
 public enum ColumnKey: Hashable {
     case primary
     case notPrimary

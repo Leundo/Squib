@@ -9,7 +9,7 @@ import Foundation
 @testable import Squib
 
 
-struct Book: Tableable, Reflectable, Rebuildable, Hashable {
+struct Book: Explosive, Hashable {
     @Columnable(idColumn, constraint: [.primaryKey, .autoIncrement])
     var id: Int = 0
     @Columnable(titleColumn, constraint: [.notNull])

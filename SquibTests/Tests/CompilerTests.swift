@@ -11,7 +11,7 @@ import XCTest
 
 
 final class CompilerTests: XCTestCase {
-    lazy var innateConnection = try! Connection(.path(value: Bundle(for: SQLiteTests.self).path(forResource: "innate", ofType: "db")!), "innate")
+    lazy var innateConnection = try! Connection(.path(value: Bundle(for: CompilerTests.self).path(forResource: "innate", ofType: "db")!), "innate")
     lazy var acquiredConnection = try! Connection(.path(value: NSHomeDirectory() + "/Documents/acquired.db"), "acquired")
     
     override func setUpWithError() throws {

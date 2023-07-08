@@ -12,7 +12,7 @@ import CryptoKit
 
 
 final class FluctuatingTests: XCTestCase {
-    lazy var innateConnection = try! Connection(.path(value: Bundle(for: SQLiteTests.self).path(forResource: "innate", ofType: "db")!), "innate")
+    lazy var innateConnection = try! Connection(.path(value: Bundle(for: FluctuatingTests.self).path(forResource: "innate", ofType: "db")!), "innate")
     lazy var acquiredConnection = try! Connection(.path(value: NSHomeDirectory() + "/Documents/acquired.db"), "acquired")
     
     override func setUpWithError() throws {
@@ -22,7 +22,12 @@ final class FluctuatingTests: XCTestCase {
     override func tearDownWithError() throws {
     }
     
-    func testSharpArray() throws {
+    func testPerformanceExample() throws {
+        self.measure {
+        }
+    }
+    
+    func testWrappers() throws {
         var foo = Foo()
         foo.dates = [Date(timeIntervalSince1970: 0), Date(timeIntervalSince1970: 4096)]
         foo.optionalDates = nil
@@ -42,7 +47,7 @@ final class FluctuatingTests: XCTestCase {
 }
 
 
-fileprivate struct Foo: Hashable, Tableable, Reflectable, Rebuildable {
+fileprivate struct Foo: Hashable, Explosive {
     @Columnable("id", constraint: [.primaryKey, .autoIncrement])
     var id: Int = 0
     @Columnable("dates")
@@ -60,7 +65,7 @@ fileprivate struct Foo: Hashable, Tableable, Reflectable, Rebuildable {
     @Columnable("clocks")
     @AESEncryptable
     @JSONDataCodable
-    var clocks: [Date] = []
+    var clocks: [Date]? = []
     
     init() {}
     static let tableInfo: TableInfo = TableInfo(name: "foo", connection: "acquired", constraints: [])
