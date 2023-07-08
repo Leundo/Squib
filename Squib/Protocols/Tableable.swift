@@ -147,21 +147,6 @@ public enum Datatype: Int, Hashable {
     case text = 3
     case blob = 4
     case null = 5
-    
-    internal var swiftType: Any.Type? {
-        switch self {
-        case .interger:
-            return Int64.self
-        case .real:
-            return Double.self
-        case .text:
-            return String.self
-        case .blob:
-            return Blob.self
-        case .null:
-            return nil
-        }
-    }
 }
 
 

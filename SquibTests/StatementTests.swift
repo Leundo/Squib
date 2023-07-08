@@ -32,7 +32,7 @@ final class StatementTests: XCTestCase {
         let statement = try Statement(acquiredConnection, "INSERT INTO book(title, price, page, author, data) values(?, ?, ?, ?, ?)")
         for columnCount in 0..<2 {
             if columnCount == 0 {
-                try statement.run("海边的卡夫卡", 23.5, 400, nil, Blob(bytes: [111, 111, 111]))
+                try statement.run("海边的卡夫卡", 23.5, 400, nil, Data([111, 111, 111]))
             } else {
                 try statement.run("麦克白", nil, nil, "莎士比亚", nil)
             }

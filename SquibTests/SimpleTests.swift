@@ -36,7 +36,7 @@ final class SimpleTests: XCTestCase {
     func testInserting() throws {
         let statement = try Statement(acquiredConnection, "INSERT INTO xctest_book(name, price, page, author, data) values(?, ?, ?, ?, ?)")
         for columnCount in 0..<2 {
-            try statement.run("StatementTests\(columnCount)", 0.1, 100, nil, Blob(bytes: [112, 112, 112]))
+            try statement.run("StatementTests\(columnCount)", 0.1, 100, nil, Data([112, 112, 112]))
         }
     }
 }

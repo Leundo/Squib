@@ -22,7 +22,7 @@ final class CompilerTests: XCTestCase {
     }
     
     func testInsertingAndQuerying() throws {
-        let missingPerson = Book(id: 0, title: "暗店街", author: "莫迪亚诺", price: 23.5, page: 400, data: Blob(bytes: [110, 110, 110]))
+        let missingPerson = Book(id: 0, title: "暗店街", author: "莫迪亚诺", price: 23.5, page: 400, data: Data([110, 110, 110]))
         
         try Statement(acquiredConnection, Compiler.drop(table: Book.tableInfo.table)).run()
         try Statement(acquiredConnection, Compiler.create(detailTableInfo: Book.detailTableInfo)).run()

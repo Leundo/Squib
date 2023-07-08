@@ -33,7 +33,7 @@ extension Double: Expressive {
     }
 }
 
-extension Blob: Expressive {
+extension Data: Expressive {
     public var incantation: String {
         fatalError("incantation has not been implemented")
     }

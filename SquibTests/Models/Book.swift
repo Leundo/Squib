@@ -21,11 +21,11 @@ struct Book: Tableable, Reflectable, Rebuildable, Hashable {
     @Columnable(pageColumn)
     var page: Int? = nil
     @Columnable(dataColumn)
-    var data: Blob? = nil
+    var data: Data? = nil
     
     init() {}
     
-    init(id: Int, title: String, author: String?, price: Double?, page: Int?, data: Blob?) {
+    init(id: Int, title: String, author: String?, price: Double?, page: Int?, data: Data?) {
         self.id = id
         self.title = title
         self.author = author

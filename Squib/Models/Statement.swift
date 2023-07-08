@@ -61,10 +61,10 @@ extension Statement {
         switch value {
         case .none:
             sqlite3_bind_null(handle, Int32(index))
-        case let value as Blob where value.bytes.count == 0:
+        case let value as Data where value.count == 0:
             sqlite3_bind_zeroblob(handle, Int32(index), 0)
-        case let value as Blob:
-            sqlite3_bind_blob(handle, Int32(index), value.bytes, Int32(value.bytes.count), Constant.SQLITE_TRANSIENT)
+        case let value as Data:
+            sqlite3_bind_blob(handle, Int32(index), Array(value), Int32(value.count), Constant.SQLITE_TRANSIENT)
         case let value as Double:
             sqlite3_bind_double(handle, Int32(index), value)
         case let value as Int64:
@@ -180,11 +180,11 @@ internal struct Cursor {
         case .blob:
             if let pointer = sqlite3_column_blob(handle, Int32(index)) {
                 let length = Int(sqlite3_column_bytes(handle, Int32(index)))
-                return Blob(bytes: pointer, length: length)
+                return Data(bytes: pointer, length: length)
             } else {
                 // The return value from sqlite3_column_blob() for a zero-length BLOB is a NULL pointer.
                 // https://www.sqlite.org/c3ref/column_blob.html
-                return Blob(bytes: [])
+                return Data()
             }
         }
     }

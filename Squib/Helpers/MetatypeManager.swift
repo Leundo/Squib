@@ -25,6 +25,6 @@ public class MetatypeManager {
     ]
     
     public static var blobBindableTypes: [Any.Type] = [
-        Blob.self, Optional<Blob>.self,
+        Data.self, Optional<Data>.self,
     ]
 }

@@ -21,4 +21,4 @@ extension Storable {
 extension String: Storable { }
 extension Int64: Storable { }
 extension Double: Storable { }
-extension Blob: Storable { }
+extension Data: Storable { }

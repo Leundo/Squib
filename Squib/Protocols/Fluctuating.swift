@@ -42,17 +42,17 @@ extension Date: Fluctuating {
 }
 
 
-extension Data: Fluctuating {
-    public var storedValue: Blob? { return Blob.from(self) }
-    public var incantation: String { return self.storedValue.incantation }
-    public static func from(_ storableValue: (any Storable)?) throws -> Data {
-        if let storableValue = storableValue as? Blob {
-            return storableValue.toData()
-        } else {
-            throw SquibError.plasticError(storableValue: storableValue)
-        }
-    }
-}
+//extension Data: Fluctuating {
+//    public var storedValue: Blob? { return Blob.from(self) }
+//    public var incantation: String { return self.storedValue.incantation }
+//    public static func from(_ storableValue: (any Storable)?) throws -> Data {
+//        if let storableValue = storableValue as? Blob {
+//            return storableValue.toData()
+//        } else {
+//            throw SquibError.plasticError(storableValue: storableValue)
+//        }
+//    }
+//}
 
 
 extension Optional: Fluctuating where Wrapped: Bindable, Wrapped: Plastic, Wrapped: Expressive, Wrapped: Hashable {}
@@ -183,25 +183,25 @@ extension JSONDecoderBindable: Hashable where WrappedValue: Hashable {}
 // MARK: - DataBindable
 @propertyWrapper
 public struct DataBindable<WrappedValue: Codable>: Fluctuating, BlobBindable {
-    public typealias SpecificStorable = Blob
+    public typealias SpecificStorable = Data
     public var wrappedValue: WrappedValue
     
     public init(wrappedValue value: WrappedValue) {
         self.wrappedValue = value
     }
     
-    public var storedValue: Blob? {
+    public var storedValue: Data? {
         let encoder = JSONEncoder()
         guard let data = try? encoder.encode(wrappedValue) else {
             fatalError("DataBindable \(String(describing: wrappedValue))")
         }
-        return Blob.from(data)
+        return data
     }
     
     public static func from(_ storableValue: (any Storable)?) throws -> DataBindable<WrappedValue> {
-        if let storableValue = storableValue as? Blob {
+        if let storableValue = storableValue as? Data {
             let decoder = JSONDecoder()
-            return DataBindable<WrappedValue>(wrappedValue: try decoder.decode(WrappedValue.self, from: storableValue.toData()))
+            return DataBindable<WrappedValue>(wrappedValue: try decoder.decode(WrappedValue.self, from: storableValue))
         } else {
             throw SquibError.plasticError(storableValue: storableValue)
         }

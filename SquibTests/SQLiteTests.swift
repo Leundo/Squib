@@ -69,7 +69,7 @@ final class SQLiteTests: XCTestCase {
                     case 5:
                         if sqlite3_column_type(queryStatement, Int32(index)) == 3, let pointer = sqlite3_column_blob(queryStatement, Int32(index)) {
                             let length = Int(sqlite3_column_bytes(queryStatement, Int32(index)))
-                            print(Blob(bytes: pointer, length: length))
+                            print(Data(bytes: pointer, length: length))
                         }
                     default:
                         break
@@ -81,7 +81,7 @@ final class SQLiteTests: XCTestCase {
     
     func testInserting() throws {
         print(acquiredPath)
-        let blob = Blob(bytes: [111, 111, 111])
+        let blob = Data([111, 111, 111])
         var statement: OpaquePointer?
         
         if sqlite3_prepare_v2(acquiredDb, "INSERT INTO xctest_book(name, price, page, author, data) values(?, ?, ?, ?, ?)", -1, &statement, nil) ==
@@ -91,7 +91,7 @@ final class SQLiteTests: XCTestCase {
                 sqlite3_bind_double(statement, 2, 0.1)
                 sqlite3_bind_int64(statement, 3, 100)
                 sqlite3_bind_null(statement, 4)
-                sqlite3_bind_blob(statement, 5, blob.bytes, Int32(blob.bytes.count), SQLITE_TRANSIENT)
+                sqlite3_bind_blob(statement, 5, Array(blob), Int32(blob.count), SQLITE_TRANSIENT)
                 
                 print(sqlite3_step(statement))
                 sqlite3_reset(statement)
