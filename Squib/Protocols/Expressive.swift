@@ -52,7 +52,7 @@ extension Optional: Expressive where Wrapped: Expressive {
 
 public enum Canister: Expressive {
     case column(payload: Address.Column)
-    case value(payload: Expressive)
+    case value(payload: any Expressive)
     
     public var incantation: String {
         switch self {
@@ -69,5 +69,11 @@ public enum Canister: Expressive {
         case let .column(payload):
             return payload.weave(environment)
         }
+    }
+    public var isValue: Bool {
+        if case .value = self {
+            return true
+        }
+        return false
     }
 }

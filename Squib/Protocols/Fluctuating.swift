@@ -43,3 +43,10 @@ extension Date: Fluctuating {
 
 
 extension Optional: Fluctuating where Wrapped: Bindable, Wrapped: Plastic, Wrapped: Expressive, Wrapped: Hashable {}
+
+
+//@propertyWrapper
+//internal struct IntervalArray<Element> {
+//    internal var wrappedValue: Wrapped
+//
+//}

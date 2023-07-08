@@ -15,6 +15,13 @@ public class Condition: Expressive {
     public func weave(_ environment: String?) -> String {
         fatalError("weave has not been implemented")
     }
+    public func bind(_ values: (any Expressive)...) -> Condition {
+        return bind(values)
+    }
+    public func bind(_ values: [any Expressive]) -> Condition {
+        if values.isEmpty { return self }
+        fatalError("bind has not been implemented")
+    }
 }
 
 
@@ -68,7 +75,29 @@ public class ArrayLikeParallelCondition: ParallelCondition {
     public override var trios: [Trio] { return _trios }
     private var _trios: [Trio]
     
+    private lazy var valueCount: Int = {
+        return trios.map { ($0.lhs.isValue ? 1 : 0) + ($0.rhs.isValue ? 1 : 0) }.reduce(0, +)
+    }()
+    
     public init(_ trios: [Trio]) {
         self._trios = trios
+    }
+    
+    public override func bind(_ values: [any Expressive]) -> Condition {
+        if values.count != valueCount {
+            fatalError("there are \(valueCount) values in condition, but \(values.count) in argument")
+        }
+        var index = 0
+        for group in 0..<_trios.count {
+            if _trios[group].lhs.isValue {
+                _trios[group].lhs = .value(payload: values[index])
+                index += 1
+            }
+            if _trios[group].rhs.isValue {
+                _trios[group].rhs = .value(payload: values[index])
+                index += 1
+            }
+        }
+        return self
     }
 }
