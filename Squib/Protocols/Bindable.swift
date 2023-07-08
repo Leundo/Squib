@@ -14,11 +14,12 @@ public protocol Bindable {
 }
 
 
-public protocol StringBindable: Bindable {}
-public protocol Int64Bindable: Bindable {}
-public protocol DoubleBindable: Bindable {}
-public protocol BlobBindable: Bindable {}
+public protocol StringBindable: Bindable { var storedValue: String? { get } }
+public protocol Int64Bindable: Bindable { var storedValue: Int64? { get } }
+public protocol DoubleBindable: Bindable { var storedValue: Double? { get } }
+public protocol BlobBindable: Bindable { var storedValue: Data? { get } }
 
+extension Data: BlobBindable {}
 
 extension Optional: Bindable where Wrapped: Bindable {
     public var storedValue: Wrapped.SpecificStorable? {

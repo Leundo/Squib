@@ -6,6 +6,7 @@
 //
 
 import XCTest
+import CryptoKit
 @testable import Squib
 
 
@@ -53,6 +54,7 @@ fileprivate struct Foo: Hashable, Tableable, Reflectable, Rebuildable {
     @JSONDecoderBindable
     var times: [Date] = []
     @Columnable("clocks")
+    @AESEncryptable
     @DataBindable
     var clocks: [Date] = []
     
