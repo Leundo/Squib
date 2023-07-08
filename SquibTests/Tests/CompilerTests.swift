@@ -21,7 +21,7 @@ final class CompilerTests: XCTestCase {
     override func tearDownWithError() throws {
     }
     
-    func testLine() throws {
+    func testInsertingAndQuerying() throws {
         let missingPerson = Book(id: 0, title: "暗店街", author: "莫迪亚诺", price: 23.5, page: 400, data: Blob(bytes: [110, 110, 110]))
         
         try Statement(acquiredConnection, Compiler.drop(table: Book.tableInfo.table)).run()
@@ -30,6 +30,8 @@ final class CompilerTests: XCTestCase {
         let replacing = try Statement(acquiredConnection, Compiler.replace(table: Book.detailTableInfo.table, columns: Book.columnDictionary[.notPrimary]!, environment: acquiredConnection.alias))
         try replacing.run(missingPerson.getReflectedValues(Book.columnDictionary[.notPrimary]!))
         let querying = try Statement(acquiredConnection, Compiler.query(tables: [Book.detailTableInfo.table], columns: Book.columnDictionary[.notPrimary]!, environment: acquiredConnection.alias))
-        print(try Array<Book>.from(try querying.retrieve(), Book.columnDictionary[.notPrimary]!))
+        
+        let retrievedBook = try Array<Book>.from(try querying.retrieve(), Book.columnDictionary[.notPrimary]!)[0]
+        XCTAssert(retrievedBook == missingPerson)
     }
 }
