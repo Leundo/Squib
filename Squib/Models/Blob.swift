@@ -18,4 +18,12 @@ public struct Blob: Hashable {
         let i8bufptr = UnsafeBufferPointer(start: bytes.assumingMemoryBound(to: UInt8.self), count: length)
         self.init(bytes: [UInt8](i8bufptr))
     }
+    
+    public static func from(_ data: Data) -> Blob {
+        return Blob(bytes: Array(data))
+    }
+    
+    public func toData() -> Data {
+        return Data(bytes)
+    }
 }

@@ -26,6 +26,7 @@ final class FluctuatingTests: XCTestCase {
         foo.dates = [Date(timeIntervalSince1970: 0), Date(timeIntervalSince1970: 4096)]
         foo.times = [Date(timeIntervalSince1970: 20000), Date(timeIntervalSince1970: 40000)]
         foo.papers = ["AAA", "BBB"]
+        foo.clocks = [Date(timeIntervalSince1970: 80000), Date(timeIntervalSince1970: 160000)]
         
         try Statement(acquiredConnection, Compiler.drop(table: Foo.tableInfo.table)).run()
         try Statement(acquiredConnection, Compiler.create(detailTableInfo: Foo.detailTableInfo)).run()
@@ -51,6 +52,9 @@ fileprivate struct Foo: Hashable, Tableable, Reflectable, Rebuildable {
     @Columnable("times")
     @JSONDecoderBindable
     var times: [Date] = []
+    @Columnable("clocks")
+    @DataBindable
+    var clocks: [Date] = []
     
     init() {}
     static let tableInfo: TableInfo = TableInfo(name: "foo", connection: "acquired", constraints: [])

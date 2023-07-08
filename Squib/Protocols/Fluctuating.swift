@@ -42,6 +42,19 @@ extension Date: Fluctuating {
 }
 
 
+extension Data: Fluctuating {
+    public var storedValue: Blob? { return Blob.from(self) }
+    public var incantation: String { return self.storedValue.incantation }
+    public static func from(_ storableValue: (any Storable)?) throws -> Data {
+        if let storableValue = storableValue as? Blob {
+            return storableValue.toData()
+        } else {
+            throw SquibError.plasticError(storableValue: storableValue)
+        }
+    }
+}
+
+
 extension Optional: Fluctuating where Wrapped: Bindable, Wrapped: Plastic, Wrapped: Expressive, Wrapped: Hashable {}
 
 
@@ -164,3 +177,41 @@ public struct JSONDecoderBindable<WrappedValue: Codable>: Fluctuating, StringBin
 
 extension JSONDecoderBindable: Equatable where WrappedValue: Equatable {}
 extension JSONDecoderBindable: Hashable where WrappedValue: Hashable {}
+
+
+
+// MARK: - DataBindable
+@propertyWrapper
+public struct DataBindable<WrappedValue: Codable>: Fluctuating, BlobBindable {
+    public typealias SpecificStorable = Blob
+    public var wrappedValue: WrappedValue
+    
+    public init(wrappedValue value: WrappedValue) {
+        self.wrappedValue = value
+    }
+    
+    public var storedValue: Blob? {
+        let encoder = JSONEncoder()
+        guard let data = try? encoder.encode(wrappedValue) else {
+            fatalError("DataBindable \(String(describing: wrappedValue))")
+        }
+        return Blob.from(data)
+    }
+    
+    public static func from(_ storableValue: (any Storable)?) throws -> DataBindable<WrappedValue> {
+        if let storableValue = storableValue as? Blob {
+            let decoder = JSONDecoder()
+            return DataBindable<WrappedValue>(wrappedValue: try decoder.decode(WrappedValue.self, from: storableValue.toData()))
+        } else {
+            throw SquibError.plasticError(storableValue: storableValue)
+        }
+    }
+    
+    public var incantation: String {
+        return storedValue.incantation
+    }
+}
+
+
+extension DataBindable: Equatable where WrappedValue: Equatable {}
+extension DataBindable: Hashable where WrappedValue: Hashable {}
