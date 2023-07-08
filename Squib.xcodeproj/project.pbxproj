@@ -44,6 +44,7 @@
 		71AC8B512A5950BA0038811B /* Reflectable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71AC8B502A5950BA0038811B /* Reflectable.swift */; };
 		71AC8B532A5952E20038811B /* Phantom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71AC8B522A5952E20038811B /* Phantom.swift */; };
 		71AC8B552A595A5F0038811B /* Rebuildable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71AC8B542A595A5F0038811B /* Rebuildable.swift */; };
+		71AC8B572A597CFC0038811B /* FluctuatingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71AC8B562A597CFC0038811B /* FluctuatingTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -94,6 +95,7 @@
 		71AC8B502A5950BA0038811B /* Reflectable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reflectable.swift; sourceTree = "<group>"; };
 		71AC8B522A5952E20038811B /* Phantom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Phantom.swift; sourceTree = "<group>"; };
 		71AC8B542A595A5F0038811B /* Rebuildable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rebuildable.swift; sourceTree = "<group>"; };
+		71AC8B562A597CFC0038811B /* FluctuatingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FluctuatingTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -146,6 +148,7 @@
 			isa = PBXGroup;
 			children = (
 				7125C5952A594E5300BBEDE3 /* CompilerTests.swift */,
+				71AC8B562A597CFC0038811B /* FluctuatingTests.swift */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -398,6 +401,7 @@
 			files = (
 				7125C5872A58DD1E00BBEDE3 /* Book.swift in Sources */,
 				7125C5962A594E5300BBEDE3 /* CompilerTests.swift in Sources */,
+				71AC8B572A597CFC0038811B /* FluctuatingTests.swift in Sources */,
 				7125C5912A58F65100BBEDE3 /* ColumnableTests.swift in Sources */,
 				718DCD492A580B9F005D4414 /* SimpleTests.swift in Sources */,
 				718DCD1C2A57CD7C005D4414 /* SquibTests.swift in Sources */,

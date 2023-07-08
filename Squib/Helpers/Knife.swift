@@ -21,6 +21,14 @@ final internal class Knife {
             } + end
         }
     }
+    
+    internal static func split(_ str: String, delimiter: String, shouldTrim: Bool = true) -> [String] {
+        let list = str.components(separatedBy: delimiter)
+        if shouldTrim {
+            return Array(list.prefix(list.count - 1))
+        }
+        return list
+    }
 }
 
 
