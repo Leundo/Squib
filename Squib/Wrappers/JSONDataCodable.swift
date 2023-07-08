@@ -1,5 +1,5 @@
 //
-//  DataBindable.swift
+//  JSONDataCodable.swift
 //  Squib
 //
 //  Created by Undo Hatsune on 2023/07/09.
@@ -9,7 +9,7 @@ import Foundation
 
 
 @propertyWrapper
-public struct DataBindable<WrappedValue: Codable>: Fluctuating, BlobBindable {
+public struct JSONDataCodable<WrappedValue: Codable>: Fluctuating, DataBindable {
     public typealias SpecificStorable = Data
     public var wrappedValue: WrappedValue
     
@@ -20,15 +20,15 @@ public struct DataBindable<WrappedValue: Codable>: Fluctuating, BlobBindable {
     public var storedValue: Data? {
         let encoder = JSONEncoder()
         guard let data = try? encoder.encode(wrappedValue) else {
-            fatalError("DataBindable \(String(describing: wrappedValue))")
+            fatalError("JSONDataCodable \(String(describing: wrappedValue))")
         }
         return data
     }
     
-    public static func from(_ storableValue: (any Storable)?) throws -> DataBindable<WrappedValue> {
+    public static func from(_ storableValue: (any Storable)?) throws -> JSONDataCodable<WrappedValue> {
         if let storableValue = storableValue as? Data {
             let decoder = JSONDecoder()
-            return DataBindable<WrappedValue>(wrappedValue: try decoder.decode(WrappedValue.self, from: storableValue))
+            return JSONDataCodable<WrappedValue>(wrappedValue: try decoder.decode(WrappedValue.self, from: storableValue))
         } else {
             throw SquibError.plasticError(storableValue: storableValue)
         }
@@ -40,5 +40,5 @@ public struct DataBindable<WrappedValue: Codable>: Fluctuating, BlobBindable {
 }
 
 
-extension DataBindable: Equatable where WrappedValue: Equatable {}
-extension DataBindable: Hashable where WrappedValue: Hashable {}
+extension JSONDataCodable: Equatable where WrappedValue: Equatable {}
+extension JSONDataCodable: Hashable where WrappedValue: Hashable {}

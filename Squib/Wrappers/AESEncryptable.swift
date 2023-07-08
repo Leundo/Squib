@@ -10,7 +10,7 @@ import CryptoKit
 
 
 @propertyWrapper
-public struct AESEncryptable<WrappedValue: BlobBindable & Plastic>: Fluctuating, BlobBindable {
+public struct AESEncryptable<WrappedValue: DataBindable & Plastic>: Fluctuating, DataBindable {
     public typealias SpecificStorable = Data
     public var wrappedValue: WrappedValue
     

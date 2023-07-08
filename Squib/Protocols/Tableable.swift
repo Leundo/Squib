@@ -25,7 +25,7 @@ extension Tableable {
                     return ColumnDescription(value.name, Datatype.real, value.constraint)
                 } else if MetatypeManager.stringBindableTypes.contains(where: {value.valueType == $0 }) || value.valueType is any StringBindable.Type {
                     return ColumnDescription(value.name, Datatype.text, value.constraint)
-                } else if MetatypeManager.blobBindableTypes.contains(where: {value.valueType == $0 }) || value.valueType is any BlobBindable.Type {
+                } else if MetatypeManager.blobBindableTypes.contains(where: {value.valueType == $0 }) || value.valueType is any DataBindable.Type {
                     return ColumnDescription(value.name, Datatype.blob, value.constraint)
                 }
                 fatalError("could not process \(value.valueType)")

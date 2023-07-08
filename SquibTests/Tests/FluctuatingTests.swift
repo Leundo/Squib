@@ -48,14 +48,14 @@ fileprivate struct Foo: Hashable, Tableable, Reflectable, Rebuildable {
     @SharpArrayBindable
     var dates: [Date] = []
     @Columnable("papers")
-    @JSONSerializationBindable
+    @JSONSerializable
     var papers: [String] = []
     @Columnable("times")
-    @JSONDecoderBindable
+    @JSONUtfCodable
     var times: [Date] = []
     @Columnable("clocks")
     @AESEncryptable
-    @DataBindable
+    @JSONDataCodable
     var clocks: [Date] = []
     
     init() {}
