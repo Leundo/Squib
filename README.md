@@ -7,25 +7,25 @@ struct Article: Explosive, Hashable {
 	@Columnable("id", constraint: [.primaryKey, .autoIncrement])
 	var id: Int = 0
 
-    @Columnable("title", constraint: [.notNull])
-    var title: String = ""
+	@Columnable("title", constraint: [.notNull])
+	var title: String = ""
 
-    @Columnable("publishedDate")
-    var publishedDate: Date = Date()
+	@Columnable("publishedDate")
+	var publishedDate: Date = Date()
 
-    @Columnable("author")
-    var author: String? = nil
+	@Columnable("author")
+	var author: String? = nil
 
-    @Columnable("readers")
-    @AESEncryptable
-    @JSONDataCodable
-    var readers: [String] = []
+	@Columnable("readers")
+	@AESEncryptable
+	@JSONDataCodable
+	var readers: [String] = []
 
-    @Columnable("content")
-    var content: Data
+	@Columnable("content")
+	var content: Data = Data()
 
-    init() {}
-    static let tableInfo: TableInfo = TableInfo(name: "article", connection: "acquired", constraints: [.unique(names: ["title", "author"])])
+	init() {}
+	static let tableInfo: TableInfo = TableInfo(name: "article", connection: "acquired", constraints: [.unique(names: ["title", "author"])])
 }
 ```
 
