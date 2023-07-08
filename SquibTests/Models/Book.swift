@@ -14,11 +14,16 @@ struct Book {
     var id: Int = 0
     @Columnable(titleColumn, constraint: [.notNull])
     var title: String = ""
-//    @Columnable(authorColumn)
+    @Columnable(authorColumn)
     var author: String? = nil
+    @Columnable(priceColumn)
     var price: Double? = nil
+    @Columnable(pageColumn)
     var page: Int? = nil
+    @Columnable(dataColumn)
     var data: Blob? = nil
+    
+    init() {}
 }
 
 

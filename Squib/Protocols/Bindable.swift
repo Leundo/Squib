@@ -14,9 +14,11 @@ public protocol Bindable {
 }
 
 
-//extension Optional: Bindable where Wrapped: Bindable {
-//    public typealias StorableType = Wrapped
-//    var storedValue: Wrapped? {
-//        return nil
-//    }
-//}
+extension Optional: Bindable where Wrapped: Bindable {
+    public var storedValue: Wrapped.StorableType? {
+        if let self = self {
+            return self.storedValue
+        }
+        return nil
+    }
+}
