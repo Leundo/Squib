@@ -8,7 +8,7 @@
 import Foundation
 
 
-public struct Blob {
+public struct Blob: Hashable {
     public let bytes: [UInt8]
     public init(bytes: [UInt8]) {
         self.bytes = bytes

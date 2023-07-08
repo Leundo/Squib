@@ -30,11 +30,11 @@ public final class Statement {
 
 // MARK: - Bind
 extension Statement {
-    public func bind(_ values: Bindable?...) -> Statement {
+    public func bind(_ values: (any Bindable)?...) -> Statement {
         bind(values)
     }
     
-    public func bind(_ values: [Bindable?]) -> Statement {
+    public func bind(_ values: [(any Bindable)?]) -> Statement {
         reset()
         if values.isEmpty { return self }
         guard values.count == Int(sqlite3_bind_parameter_count(handle)) else {
@@ -44,7 +44,7 @@ extension Statement {
         return self
     }
     
-    public func bind(_ values: [String: Bindable?]) -> Statement {
+    public func bind(_ values: [String: (any Bindable)?]) -> Statement {
         reset()
         for (name, value) in values {
             let index = sqlite3_bind_parameter_index(handle, name)
@@ -56,7 +56,7 @@ extension Statement {
         return self
     }
     
-    fileprivate func bind(_ value: Bindable?, at index: Int) {
+    fileprivate func bind(_ value: (any Bindable)?, at index: Int) {
         let value = value?.storedValue
         switch value {
         case .none:
@@ -97,7 +97,7 @@ extension Statement {
         return try connection.check(sqlite3_step(handle)) == SQLITE_ROW
     }
     
-    @discardableResult public func run(_ values: Bindable?...) throws -> Statement {
+    @discardableResult public func run(_ values: (any Bindable)?...) throws -> Statement {
         guard values.isEmpty else {
             return try run(values)
         }
@@ -107,36 +107,36 @@ extension Statement {
         return self
     }
     
-    @discardableResult public func run(_ values: [String: Bindable?]) throws -> Statement {
+    @discardableResult public func run(_ values: [String: (any Bindable)?]) throws -> Statement {
         try bind(values).run()
     }
     
-    @discardableResult public func run(_ values: [Bindable?]) throws -> Statement {
+    @discardableResult public func run(_ values: [(any Bindable)?]) throws -> Statement {
         try bind(values).run()
     }
     
-    public func retrieve(_ values: Bindable?...) throws -> [[Storable?]] {
+    public func retrieve(_ values: (any Bindable)?...) throws -> [[(any Storable)?]] {
         guard values.isEmpty else {
             return try retrieve(values)
         }
         
         reset(clearBindables: false)
-        var results: [[Storable?]] = []
+        var results: [[(any Storable)?]] = []
         while try step() {
-            results.append(Array<Storable?>(Cursor(self)))
+            results.append(Array<(any Storable)?>(Cursor(self)))
         }
         return results
     }
     
-    public func retrieve(_ values: [Bindable?]) throws -> [[Storable?]] {
+    public func retrieve(_ values: [(any Bindable)?]) throws -> [[(any Storable)?]] {
         return try bind(values).retrieve()
     }
     
-    public func retrieve(_ values: [String: Bindable?]) throws -> [[Storable?]] {
+    public func retrieve(_ values: [String: (any Bindable)?]) throws -> [[(any Storable)?]] {
         return try bind(values).retrieve()
     }
     
-    public func extract(_ values: Bindable?...) throws -> Storable? {
+    public func extract(_ values: (any Bindable)?...) throws -> (any Storable)? {
         guard values.isEmpty else {
             return try extract(values)
         }
@@ -146,11 +146,11 @@ extension Statement {
         return Cursor(self)[0]
     }
     
-    public func extract(_ values: [Bindable?]) throws -> Storable? {
+    public func extract(_ values: [(any Bindable)?]) throws -> (any Storable)? {
         return try bind(values).extract()
     }
     
-    public func extract(_ values: [String: Bindable?]) throws -> Storable? {
+    public func extract(_ values: [String: (any Bindable)?]) throws -> (any Storable)? {
         return try bind(values).extract()
     }
 }
@@ -166,7 +166,7 @@ internal struct Cursor {
         columnCount = statement.columnCount
     }
     
-    public subscript(index: Int) -> Storable? {
+    public subscript(index: Int) -> (any Storable)? {
         let type = Datatype.init(rawValue: Int(sqlite3_column_type(handle, Int32(index))))!
         switch type {
         case .null:
@@ -192,7 +192,7 @@ internal struct Cursor {
 
 
 extension Cursor: Sequence {
-    internal func makeIterator() -> AnyIterator<Storable?> {
+    internal func makeIterator() -> AnyIterator<(any Storable)?> {
         var index = 0
         return AnyIterator {
             if index >= columnCount {

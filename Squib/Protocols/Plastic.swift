@@ -9,12 +9,12 @@ import Foundation
 
 
 public protocol Plastic {
-    static func from(_ storableValue: Storable?) throws -> Self
+    static func from(_ storableValue: (any Storable)?) throws -> Self
 }
 
 
 extension Optional: Plastic where Wrapped: Plastic {
-    public static func from(_ storableValue: Storable?) throws -> Self {
+    public static func from(_ storableValue: (any Storable)?) throws -> Self {
         if let storableValue = storableValue {
             return try Wrapped.from(storableValue)
         } else {

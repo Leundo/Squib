@@ -9,7 +9,8 @@ import Foundation
 
 
 public protocol Bindable {
-    var storedValue: Storable { get }
+    associatedtype StorableType: Storable
+    var storedValue: StorableType { get }
 }
 
 

@@ -11,6 +11,14 @@
 		7125C5732A585C3200BBEDE3 /* Plastic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7125C5722A585C3200BBEDE3 /* Plastic.swift */; };
 		7125C5752A585EE400BBEDE3 /* Fluctuating.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7125C5742A585EE400BBEDE3 /* Fluctuating.swift */; };
 		7125C5782A58634B00BBEDE3 /* Storehouse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7125C5772A58634B00BBEDE3 /* Storehouse.swift */; };
+		7125C57A2A5867ED00BBEDE3 /* Compiler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7125C5792A5867ED00BBEDE3 /* Compiler.swift */; };
+		7125C57C2A586B4900BBEDE3 /* Condition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7125C57B2A586B4900BBEDE3 /* Condition.swift */; };
+		7125C57E2A586C0700BBEDE3 /* Expressive.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7125C57D2A586C0700BBEDE3 /* Expressive.swift */; };
+		7125C5802A587C7900BBEDE3 /* Limitation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7125C57F2A587C7900BBEDE3 /* Limitation.swift */; };
+		7125C5822A58D89700BBEDE3 /* Address.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7125C5812A58D89700BBEDE3 /* Address.swift */; };
+		7125C5842A58DC5C00BBEDE3 /* innate.db in Resources */ = {isa = PBXBuildFile; fileRef = 7125C5832A58DC5B00BBEDE3 /* innate.db */; };
+		7125C5872A58DD1E00BBEDE3 /* Book.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7125C5862A58DD1E00BBEDE3 /* Book.swift */; };
+		7125C5892A58DE4600BBEDE3 /* StatementTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7125C5882A58DE4600BBEDE3 /* StatementTests.swift */; };
 		718DCD112A57CD7C005D4414 /* Squib.docc in Sources */ = {isa = PBXBuildFile; fileRef = 718DCD102A57CD7C005D4414 /* Squib.docc */; };
 		718DCD172A57CD7C005D4414 /* Squib.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 718DCD0C2A57CD7C005D4414 /* Squib.framework */; };
 		718DCD1C2A57CD7C005D4414 /* SquibTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 718DCD1B2A57CD7C005D4414 /* SquibTests.swift */; };
@@ -18,7 +26,6 @@
 		718DCD282A57CF90005D4414 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 718DCD272A57CF8C005D4414 /* libsqlite3.tbd */; };
 		718DCD2B2A57CFBA005D4414 /* Runtime in Frameworks */ = {isa = PBXBuildFile; productRef = 718DCD2A2A57CFBA005D4414 /* Runtime */; };
 		718DCD2D2A57CFF2005D4414 /* SQLiteTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 718DCD2C2A57CFF2005D4414 /* SQLiteTests.swift */; };
-		718DCD302A57D0F6005D4414 /* innate.db in Resources */ = {isa = PBXBuildFile; fileRef = 718DCD2F2A57D0F6005D4414 /* innate.db */; };
 		718DCD372A57DB96005D4414 /* String+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 718DCD362A57DB96005D4414 /* String+.swift */; };
 		718DCD392A57DBAA005D4414 /* Knife.swift in Sources */ = {isa = PBXBuildFile; fileRef = 718DCD382A57DBAA005D4414 /* Knife.swift */; };
 		718DCD3B2A57DC4B005D4414 /* Blob.swift in Sources */ = {isa = PBXBuildFile; fileRef = 718DCD3A2A57DC4B005D4414 /* Blob.swift */; };
@@ -28,7 +35,7 @@
 		718DCD432A57E9D7005D4414 /* Connection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 718DCD422A57E9D7005D4414 /* Connection.swift */; };
 		718DCD452A57EC7E005D4414 /* SquibError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 718DCD442A57EC7E005D4414 /* SquibError.swift */; };
 		718DCD472A57F45F005D4414 /* Proton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 718DCD462A57F45F005D4414 /* Proton.swift */; };
-		718DCD492A580B9F005D4414 /* StatementTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 718DCD482A580B9F005D4414 /* StatementTests.swift */; };
+		718DCD492A580B9F005D4414 /* SimpleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 718DCD482A580B9F005D4414 /* SimpleTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,6 +53,14 @@
 		7125C5722A585C3200BBEDE3 /* Plastic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Plastic.swift; sourceTree = "<group>"; };
 		7125C5742A585EE400BBEDE3 /* Fluctuating.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fluctuating.swift; sourceTree = "<group>"; };
 		7125C5772A58634B00BBEDE3 /* Storehouse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storehouse.swift; sourceTree = "<group>"; };
+		7125C5792A5867ED00BBEDE3 /* Compiler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Compiler.swift; sourceTree = "<group>"; };
+		7125C57B2A586B4900BBEDE3 /* Condition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Condition.swift; sourceTree = "<group>"; };
+		7125C57D2A586C0700BBEDE3 /* Expressive.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Expressive.swift; sourceTree = "<group>"; };
+		7125C57F2A587C7900BBEDE3 /* Limitation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Limitation.swift; sourceTree = "<group>"; };
+		7125C5812A58D89700BBEDE3 /* Address.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Address.swift; sourceTree = "<group>"; };
+		7125C5832A58DC5B00BBEDE3 /* innate.db */ = {isa = PBXFileReference; lastKnownFileType = file; path = innate.db; sourceTree = "<group>"; };
+		7125C5862A58DD1E00BBEDE3 /* Book.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Book.swift; sourceTree = "<group>"; };
+		7125C5882A58DE4600BBEDE3 /* StatementTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatementTests.swift; sourceTree = "<group>"; };
 		718DCD0C2A57CD7C005D4414 /* Squib.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Squib.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		718DCD0F2A57CD7C005D4414 /* Squib.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Squib.h; sourceTree = "<group>"; };
 		718DCD102A57CD7C005D4414 /* Squib.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = Squib.docc; sourceTree = "<group>"; };
@@ -53,7 +68,6 @@
 		718DCD1B2A57CD7C005D4414 /* SquibTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SquibTests.swift; sourceTree = "<group>"; };
 		718DCD272A57CF8C005D4414 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.3.sdk/usr/lib/libsqlite3.tbd; sourceTree = DEVELOPER_DIR; };
 		718DCD2C2A57CFF2005D4414 /* SQLiteTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SQLiteTests.swift; sourceTree = "<group>"; };
-		718DCD2F2A57D0F6005D4414 /* innate.db */ = {isa = PBXFileReference; lastKnownFileType = file; path = innate.db; sourceTree = "<group>"; };
 		718DCD362A57DB96005D4414 /* String+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+.swift"; sourceTree = "<group>"; };
 		718DCD382A57DBAA005D4414 /* Knife.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Knife.swift; sourceTree = "<group>"; };
 		718DCD3A2A57DC4B005D4414 /* Blob.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Blob.swift; sourceTree = "<group>"; };
@@ -63,7 +77,7 @@
 		718DCD422A57E9D7005D4414 /* Connection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Connection.swift; sourceTree = "<group>"; };
 		718DCD442A57EC7E005D4414 /* SquibError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SquibError.swift; sourceTree = "<group>"; };
 		718DCD462A57F45F005D4414 /* Proton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Proton.swift; sourceTree = "<group>"; };
-		718DCD482A580B9F005D4414 /* StatementTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatementTests.swift; sourceTree = "<group>"; };
+		718DCD482A580B9F005D4414 /* SimpleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,8 +108,17 @@
 				7125C5742A585EE400BBEDE3 /* Fluctuating.swift */,
 				7125C5722A585C3200BBEDE3 /* Plastic.swift */,
 				7125C5702A5853E600BBEDE3 /* Storable.swift */,
+				7125C57D2A586C0700BBEDE3 /* Expressive.swift */,
 			);
 			path = Protocols;
+			sourceTree = "<group>";
+		};
+		7125C5852A58DCE600BBEDE3 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				7125C5862A58DD1E00BBEDE3 /* Book.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 		718DCD022A57CD7C005D4414 = {
@@ -134,9 +157,11 @@
 			isa = PBXGroup;
 			children = (
 				718DCD2E2A57D0CB005D4414 /* Resources */,
+				7125C5852A58DCE600BBEDE3 /* Models */,
 				718DCD1B2A57CD7C005D4414 /* SquibTests.swift */,
 				718DCD2C2A57CFF2005D4414 /* SQLiteTests.swift */,
-				718DCD482A580B9F005D4414 /* StatementTests.swift */,
+				718DCD482A580B9F005D4414 /* SimpleTests.swift */,
+				7125C5882A58DE4600BBEDE3 /* StatementTests.swift */,
 			);
 			path = SquibTests;
 			sourceTree = "<group>";
@@ -152,7 +177,7 @@
 		718DCD2E2A57D0CB005D4414 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				718DCD2F2A57D0F6005D4414 /* innate.db */,
+				7125C5832A58DC5B00BBEDE3 /* innate.db */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -165,6 +190,10 @@
 				718DCD422A57E9D7005D4414 /* Connection.swift */,
 				718DCD442A57EC7E005D4414 /* SquibError.swift */,
 				718DCD462A57F45F005D4414 /* Proton.swift */,
+				7125C5792A5867ED00BBEDE3 /* Compiler.swift */,
+				7125C57B2A586B4900BBEDE3 /* Condition.swift */,
+				7125C57F2A587C7900BBEDE3 /* Limitation.swift */,
+				7125C5812A58D89700BBEDE3 /* Address.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -292,7 +321,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				718DCD302A57D0F6005D4414 /* innate.db in Resources */,
+				7125C5842A58DC5C00BBEDE3 /* innate.db in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -304,17 +333,22 @@
 			buildActionMask = 2147483647;
 			files = (
 				718DCD472A57F45F005D4414 /* Proton.swift in Sources */,
+				7125C57C2A586B4900BBEDE3 /* Condition.swift in Sources */,
 				718DCD432A57E9D7005D4414 /* Connection.swift in Sources */,
 				718DCD3F2A57E913005D4414 /* Bindable.swift in Sources */,
 				7125C5732A585C3200BBEDE3 /* Plastic.swift in Sources */,
+				7125C5822A58D89700BBEDE3 /* Address.swift in Sources */,
 				718DCD372A57DB96005D4414 /* String+.swift in Sources */,
 				7125C5752A585EE400BBEDE3 /* Fluctuating.swift in Sources */,
 				7125C5782A58634B00BBEDE3 /* Storehouse.swift in Sources */,
+				7125C57A2A5867ED00BBEDE3 /* Compiler.swift in Sources */,
 				718DCD3B2A57DC4B005D4414 /* Blob.swift in Sources */,
 				718DCD112A57CD7C005D4414 /* Squib.docc in Sources */,
+				7125C57E2A586C0700BBEDE3 /* Expressive.swift in Sources */,
 				718DCD392A57DBAA005D4414 /* Knife.swift in Sources */,
 				718DCD3D2A57E7ED005D4414 /* Constant.swift in Sources */,
 				7125C5712A5853E600BBEDE3 /* Storable.swift in Sources */,
+				7125C5802A587C7900BBEDE3 /* Limitation.swift in Sources */,
 				718DCD452A57EC7E005D4414 /* SquibError.swift in Sources */,
 				718DCD412A57E972005D4414 /* Statement.swift in Sources */,
 			);
@@ -324,8 +358,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				718DCD492A580B9F005D4414 /* StatementTests.swift in Sources */,
+				7125C5872A58DD1E00BBEDE3 /* Book.swift in Sources */,
+				718DCD492A580B9F005D4414 /* SimpleTests.swift in Sources */,
 				718DCD1C2A57CD7C005D4414 /* SquibTests.swift in Sources */,
+				7125C5892A58DE4600BBEDE3 /* StatementTests.swift in Sources */,
 				718DCD2D2A57CFF2005D4414 /* SQLiteTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

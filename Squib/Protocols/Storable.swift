@@ -8,10 +8,10 @@
 import Foundation
 
 
-public protocol Storable: Fluctuating { }
+public protocol Storable: Bindable, Plastic { }
 extension Storable {
-    public var storedValue: Storable { return self }
-    public static func from(_ storableValue: Storable?) throws -> Self {
+    public var storedValue: Self { return self }
+    public static func from(_ storableValue: (any Storable)?) throws -> Self {
         if let storableValue = storableValue as? Self { return storableValue }
         throw SquibError.plasticError(storableValue: storableValue)
     }

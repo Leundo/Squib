@@ -10,10 +10,23 @@ import Foundation
 
 public final class Connection {
     public var handle: OpaquePointer { return _handle! }
+    public var alias: String
+    internal var opening: Opening
     fileprivate var _handle: OpaquePointer?
     
-    public init(_ opening: Opening) throws {
+    public init(_ opening: Opening, _ alias: String) throws {
+        self.opening = opening
+        self.alias = alias
         try check(sqlite3_open_v2(opening.description, &_handle, SQLITE_OPEN_READWRITE | SQLITE_OPEN_CREATE | SQLITE_OPEN_FULLMUTEX, nil))
+    }
+}
+
+
+extension Connection {
+    public func execute(_ sqls: [String]) throws {
+        try sqls.forEach {
+            try check(sqlite3_exec(handle, $0, nil, nil, nil))
+        }
     }
 }
 

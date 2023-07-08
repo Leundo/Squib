@@ -12,7 +12,7 @@ public enum SquibError: Error {
     fileprivate static let successCodes: Set = [SQLITE_OK, SQLITE_ROW, SQLITE_DONE]
     
     case sqliteError(message: String, code: Int32)
-    case plasticError(storableValue: Storable?)
+    case plasticError(storableValue: (any Storable)?)
     
     
     init?(code: Int32, connection: Connection) {
