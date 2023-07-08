@@ -27,6 +27,11 @@
 		7125C5962A594E5300BBEDE3 /* CompilerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7125C5952A594E5300BBEDE3 /* CompilerTests.swift */; };
 		7149B9402A599DE0005EB346 /* Data+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7149B93F2A599DE0005EB346 /* Data+.swift */; };
 		7149B9422A59B12B005EB346 /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7149B9412A59B12B005EB346 /* Configuration.swift */; };
+		7179DA492A59C4CC00F883DB /* SharpArrayBindable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7179DA482A59C4CC00F883DB /* SharpArrayBindable.swift */; };
+		7179DA4B2A59CAC200F883DB /* JSONSerializationBindable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7179DA4A2A59CAC200F883DB /* JSONSerializationBindable.swift */; };
+		7179DA4D2A59CAE900F883DB /* JSONDecoderBindable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7179DA4C2A59CAE900F883DB /* JSONDecoderBindable.swift */; };
+		7179DA4F2A59CB0C00F883DB /* DataBindable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7179DA4E2A59CB0C00F883DB /* DataBindable.swift */; };
+		7179DA512A59CB3700F883DB /* AESEncryptable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7179DA502A59CB3700F883DB /* AESEncryptable.swift */; };
 		718DCD112A57CD7C005D4414 /* Squib.docc in Sources */ = {isa = PBXBuildFile; fileRef = 718DCD102A57CD7C005D4414 /* Squib.docc */; };
 		718DCD172A57CD7C005D4414 /* Squib.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 718DCD0C2A57CD7C005D4414 /* Squib.framework */; };
 		718DCD1C2A57CD7C005D4414 /* SquibTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 718DCD1B2A57CD7C005D4414 /* SquibTests.swift */; };
@@ -79,6 +84,11 @@
 		7125C5952A594E5300BBEDE3 /* CompilerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompilerTests.swift; sourceTree = "<group>"; };
 		7149B93F2A599DE0005EB346 /* Data+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data+.swift"; sourceTree = "<group>"; };
 		7149B9412A59B12B005EB346 /* Configuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
+		7179DA482A59C4CC00F883DB /* SharpArrayBindable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharpArrayBindable.swift; sourceTree = "<group>"; };
+		7179DA4A2A59CAC200F883DB /* JSONSerializationBindable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONSerializationBindable.swift; sourceTree = "<group>"; };
+		7179DA4C2A59CAE900F883DB /* JSONDecoderBindable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONDecoderBindable.swift; sourceTree = "<group>"; };
+		7179DA4E2A59CB0C00F883DB /* DataBindable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBindable.swift; sourceTree = "<group>"; };
+		7179DA502A59CB3700F883DB /* AESEncryptable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AESEncryptable.swift; sourceTree = "<group>"; };
 		718DCD0C2A57CD7C005D4414 /* Squib.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Squib.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		718DCD0F2A57CD7C005D4414 /* Squib.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Squib.h; sourceTree = "<group>"; };
 		718DCD102A57CD7C005D4414 /* Squib.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = Squib.docc; sourceTree = "<group>"; };
@@ -155,6 +165,18 @@
 			path = Tests;
 			sourceTree = "<group>";
 		};
+		7179DA472A59C4C200F883DB /* Wrappers */ = {
+			isa = PBXGroup;
+			children = (
+				7179DA482A59C4CC00F883DB /* SharpArrayBindable.swift */,
+				7179DA4A2A59CAC200F883DB /* JSONSerializationBindable.swift */,
+				7179DA4C2A59CAE900F883DB /* JSONDecoderBindable.swift */,
+				7179DA4E2A59CB0C00F883DB /* DataBindable.swift */,
+				7179DA502A59CB3700F883DB /* AESEncryptable.swift */,
+			);
+			path = Wrappers;
+			sourceTree = "<group>";
+		};
 		718DCD022A57CD7C005D4414 = {
 			isa = PBXGroup;
 			children = (
@@ -177,6 +199,7 @@
 		718DCD0E2A57CD7C005D4414 /* Squib */ = {
 			isa = PBXGroup;
 			children = (
+				7179DA472A59C4C200F883DB /* Wrappers */,
 				7125C5762A585EED00BBEDE3 /* Protocols */,
 				718DCD352A57DB8A005D4414 /* Helpers */,
 				718DCD342A57DB83005D4414 /* Extensions */,
@@ -374,6 +397,7 @@
 				718DCD432A57E9D7005D4414 /* Connection.swift in Sources */,
 				718DCD3F2A57E913005D4414 /* Bindable.swift in Sources */,
 				7149B9402A599DE0005EB346 /* Data+.swift in Sources */,
+				7179DA4D2A59CAE900F883DB /* JSONDecoderBindable.swift in Sources */,
 				7125C5732A585C3200BBEDE3 /* Plastic.swift in Sources */,
 				7125C58F2A58F44300BBEDE3 /* Columnable.swift in Sources */,
 				7125C5822A58D89700BBEDE3 /* Address.swift in Sources */,
@@ -383,11 +407,15 @@
 				7125C5782A58634B00BBEDE3 /* Storehouse.swift in Sources */,
 				71AC8B532A5952E20038811B /* Phantom.swift in Sources */,
 				7125C57A2A5867ED00BBEDE3 /* Compiler.swift in Sources */,
+				7179DA512A59CB3700F883DB /* AESEncryptable.swift in Sources */,
 				718DCD112A57CD7C005D4414 /* Squib.docc in Sources */,
 				7125C57E2A586C0700BBEDE3 /* Expressive.swift in Sources */,
+				7179DA492A59C4CC00F883DB /* SharpArrayBindable.swift in Sources */,
 				718DCD392A57DBAA005D4414 /* Knife.swift in Sources */,
+				7179DA4F2A59CB0C00F883DB /* DataBindable.swift in Sources */,
 				718DCD3D2A57E7ED005D4414 /* Constant.swift in Sources */,
 				7125C5712A5853E600BBEDE3 /* Storable.swift in Sources */,
+				7179DA4B2A59CAC200F883DB /* JSONSerializationBindable.swift in Sources */,
 				71AC8B552A595A5F0038811B /* Rebuildable.swift in Sources */,
 				7125C5802A587C7900BBEDE3 /* Limitation.swift in Sources */,
 				7149B9422A59B12B005EB346 /* Configuration.swift in Sources */,
