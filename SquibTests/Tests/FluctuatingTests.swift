@@ -25,6 +25,7 @@ final class FluctuatingTests: XCTestCase {
     func testSharpArray() throws {
         var foo = Foo()
         foo.dates = [Date(timeIntervalSince1970: 0), Date(timeIntervalSince1970: 4096)]
+        foo.optionalDates = nil
         foo.times = [Date(timeIntervalSince1970: 20000), Date(timeIntervalSince1970: 40000)]
         foo.papers = ["AAA", "BBB"]
         foo.clocks = [Date(timeIntervalSince1970: 80000), Date(timeIntervalSince1970: 160000)]
@@ -45,8 +46,11 @@ fileprivate struct Foo: Hashable, Tableable, Reflectable, Rebuildable {
     @Columnable("id", constraint: [.primaryKey, .autoIncrement])
     var id: Int = 0
     @Columnable("dates")
-    @SharpArrayBindable
+    @SharpArrayCharacterizable
     var dates: [Date] = []
+    @Columnable("optionalDates")
+    @OptionalSharpArrayCharacterizable
+    var optionalDates: [Date]? = []
     @Columnable("papers")
     @JSONSerializable
     var papers: [String] = []

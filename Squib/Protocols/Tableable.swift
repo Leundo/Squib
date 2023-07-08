@@ -19,13 +19,13 @@ extension Tableable {
             return DetailTableInfo(tableInfo: tableInfo, columnDescriptions: Mirror(reflecting: Self.phantom).children.compactMap{
                 return $0.value as? ColumnableBridge
             }.map { value in                
-                if MetatypeManager.int64BindableTypes.contains(where: {value.valueType == $0 }) || value.valueType is any Int64Bindable.Type {
+                if value.valueType is any Int64Bindable.Type {
                     return ColumnDescription(value.name, Datatype.interger, value.constraint)
-                } else if MetatypeManager.doubleBindableTypes.contains(where: {value.valueType == $0 }) || value.valueType is any DoubleBindable.Type {
+                } else if value.valueType is any DoubleBindable.Type {
                     return ColumnDescription(value.name, Datatype.real, value.constraint)
-                } else if MetatypeManager.stringBindableTypes.contains(where: {value.valueType == $0 }) || value.valueType is any StringBindable.Type {
+                } else if value.valueType is any StringBindable.Type {
                     return ColumnDescription(value.name, Datatype.text, value.constraint)
-                } else if MetatypeManager.blobBindableTypes.contains(where: {value.valueType == $0 }) || value.valueType is any DataBindable.Type {
+                } else if value.valueType is any DataBindable.Type {
                     return ColumnDescription(value.name, Datatype.blob, value.constraint)
                 }
                 fatalError("could not process \(value.valueType)")
