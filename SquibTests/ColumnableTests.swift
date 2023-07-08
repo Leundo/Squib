@@ -21,7 +21,7 @@ final class ColumnableTests: XCTestCase {
     }
     
     func testMirror() throws {
-        print(Book.tableInfoDetail)
+        print(Book.detailTableInfo)
         for child in Mirror(reflecting: Book.init()).children {
             if let value = child.value as? ColumnableBridge {
                 print(value)
@@ -30,7 +30,19 @@ final class ColumnableTests: XCTestCase {
     }
     
     func testCreating() throws {
-        print(Compiler.create(tableInfo: Book.tableInfo, detail: Book.tableInfoDetail))
+        print(Compiler.create(detailTableInfo: Book.detailTableInfo))
+    }
+    
+    func testReplacing() throws {
+        print(Compiler.replace(table: Book.detailTableInfo.table, columns: Book.detailTableInfo.columns, environment: innateConnection.alias))
+    }
+    
+    func testUpdating() throws {
+        print(Compiler.update(table: Book.detailTableInfo.table, columns: Book.detailTableInfo.columns, condition: ArrayLikeParallelCondition([]), environment: innateConnection.alias))
+    }
+    
+    func testColumnDictionary() throws {
+        print(Book.columnDictionary[.notPrimary])
     }
 }
 

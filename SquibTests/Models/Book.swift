@@ -9,7 +9,7 @@ import Foundation
 @testable import Squib
 
 
-struct Book: Tableable {
+struct Book: Tableable, Reflectable, Rebuildable {
     @Columnable(idColumn, constraint: [.primaryKey, .autoIncrement])
     var id: Int = 0
     @Columnable(titleColumn, constraint: [.notNull])
@@ -25,7 +25,16 @@ struct Book: Tableable {
     
     init() {}
     
-    static let tableInfo: TableInfo = TableInfo(name: "book", connection: "innate", constraints: [.unique(names: [titleColumn, authorColumn])])
+    init(id: Int, title: String, author: String?, price: Double?, page: Int?, data: Blob?) {
+        self.id = id
+        self.title = title
+        self.author = author
+        self.price = price
+        self.page = page
+        self.data = data
+    }
+    
+    static let tableInfo: TableInfo = TableInfo(name: "book", connection: "acquired", constraints: [.unique(names: [titleColumn, authorColumn])])
 }
 
 

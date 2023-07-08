@@ -27,17 +27,32 @@ internal struct HashableMetatype: Hashable {
 
 internal class Storehouse {
     internal static let shared = Storehouse()
-    private var storedBoxes: [Storehouse.Key: Any] = [:]
+    private var storedItems: [Storehouse.Key: Any] = [:]
+    private var storedPhantoms: [ObjectIdentifier: Any] = [:]
     
     private init() {}
     
     func getItem<T>(_ base: Any.Type, _ signature: String, initialize: () -> T) -> T {
         let key = Key(base, signature)
-        if let item = storedBoxes[key] {
+        if let item = storedItems[key] {
             return item as! T
         }
         let item = initialize()
-        storedBoxes[key] = item
+        storedItems[key] = item
+        return item
+    }
+    
+    func setItem(_ base: Any.Type, _ signature: String, item: Any) {
+        storedItems[Key(base, signature)] = item
+    }
+    
+    func getPhantom<T>(_ base: Any.Type, initialize: () -> T) -> T {
+        let key = ObjectIdentifier(base)
+        if let phantom = storedPhantoms[key] {
+            return phantom as! T
+        }
+        let item = initialize()
+        storedPhantoms[key] = item
         return item
     }
 }

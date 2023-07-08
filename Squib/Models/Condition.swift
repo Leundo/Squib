@@ -44,25 +44,31 @@ extension Condition {
 
 
  
-class ParallelCondition: Condition {
+public class ParallelCondition: Condition {
     public var trios: [Trio] {
         fatalError("trios has not been implemented")
     }
     
     public override var incantation: String {
-        return "WHERE " + Knife.concat(trios.map {$0.incantation}, delimiter: " AND ")
+        if trios.count > 0 {
+            return "WHERE " + Knife.concat(trios.map {$0.incantation}, delimiter: " AND ")
+        }
+        return ""
     }
     public override func weave(_ environment: String?) -> String {
-        return "WHERE " + Knife.concat(trios.map {$0.weave(environment)}, delimiter: " AND ")
+        if trios.count > 0 {
+            return "WHERE " + Knife.concat(trios.map {$0.weave(environment)}, delimiter: " AND ")
+        }
+        return ""
     }
 }
 
 
-class ArrayLikeParallelCondition: ParallelCondition {
+public class ArrayLikeParallelCondition: ParallelCondition {
     public override var trios: [Trio] { return _trios }
     private var _trios: [Trio]
     
-    init(_ trios: [Trio]) {
+    public init(_ trios: [Trio]) {
         self._trios = trios
     }
 }
