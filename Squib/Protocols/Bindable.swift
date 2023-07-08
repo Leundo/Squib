@@ -10,7 +10,13 @@ import Foundation
 
 public protocol Bindable {
     associatedtype StorableType: Storable
-    var storedValue: StorableType { get }
+    var storedValue: StorableType? { get }
 }
 
 
+//extension Optional: Bindable where Wrapped: Bindable {
+//    public typealias StorableType = Wrapped
+//    var storedValue: Wrapped? {
+//        return nil
+//    }
+//}

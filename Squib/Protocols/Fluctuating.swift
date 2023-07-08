@@ -12,7 +12,7 @@ public protocol Fluctuating: Bindable, Plastic, Expressive { }
 
 
 extension Int: Fluctuating {
-    public var storedValue: Int64 { return Int64(self) }
+    public var storedValue: Int64? { return Int64(self) }
     public var incantation: String { return self.storedValue.incantation }
     public static func from(_ storableValue: (any Storable)?) throws -> Int {
         return Int(try Int64.from(storableValue))
@@ -21,7 +21,7 @@ extension Int: Fluctuating {
 
 
 extension Bool: Fluctuating {
-    public var storedValue: Int64 { return self ? 1 : 0 }
+    public var storedValue: Int64? { return self ? 1 : 0 }
     public var incantation: String { return self.storedValue.incantation }
     public static func from(_ storableValue: (any Storable)?) throws -> Bool {
         return try Int64.from(storableValue) != 0 ? true : false
@@ -30,7 +30,7 @@ extension Bool: Fluctuating {
 
 
 extension Date: Fluctuating {
-    public var storedValue: String { return Constant.dateFormatter.string(from: self) }
+    public var storedValue: String? { return Constant.dateFormatter.string(from: self) }
     public var incantation: String { return self.storedValue.incantation }
     public static func from(_ storableValue: (any Storable)?) throws -> Date {
         if let storableValue = storableValue as? String, let date = Constant.dateFormatter.date(from: storableValue) {
@@ -40,3 +40,6 @@ extension Date: Fluctuating {
         }
     }
 }
+
+
+//extension Optional: Fluctuating where Wrapped: Storable, Wrapped: Plastic, Wrapped: Expressive {}
