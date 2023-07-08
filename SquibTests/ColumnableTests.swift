@@ -21,7 +21,16 @@ final class ColumnableTests: XCTestCase {
     }
     
     func testMirror() throws {
-        
+        print(Book.tableInfoDetail)
+        for child in Mirror(reflecting: Book.init()).children {
+            if let value = child.value as? ColumnableBridge {
+                print(value)
+            }
+        }
+    }
+    
+    func testCreating() throws {
+        print(Compiler.create(tableInfo: Book.tableInfo, detail: Book.tableInfoDetail))
     }
 }
 

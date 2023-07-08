@@ -38,7 +38,7 @@ extension Constraint {
             if self.contains(Column.unique) {
                 expression += "UNIQUE "
             }
-            return expression.trimmingCharacters(in: .whitespaces)
+            return expression
         }
     }
 }
@@ -55,7 +55,7 @@ extension Constraint {
                 if names.count == 0 {
                     fatalError("column name set in table unique constraint is empty")
                 }
-                return Knife.concat(names, delimiter: ", ", head: "UNIQUE(", end: ")")
+                return Knife.concat(names.map{$0.quote()}, delimiter: ", ", head: "UNIQUE(", end: ")")
             case let .primaryKey(names, isAutoIncrement):
                 if names.count == 0 {
                     fatalError("column name set in table primary key constraint is empty")
@@ -64,7 +64,7 @@ extension Constraint {
                     fatalError("count of item in column name set in table primary key and autoIncrement constraint is greater than 1")
                 }
                 let end = isAutoIncrement ? " AUTOINCREMENT)" : ")"
-                return Knife.concat(names, delimiter: ", ", head: "PRIMARY KEY(", end: end)
+                return Knife.concat(names.map{$0.quote()}, delimiter: ", ", head: "PRIMARY KEY(", end: end)
             }
         }
     }

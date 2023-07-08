@@ -23,7 +23,6 @@ final class StatementTests: XCTestCase {
     func testAttaching() throws {
         try innateConnection.execute([Compiler.attach(connection: acquiredConnection)])
         let table = Address.Table(name: "book", connection: acquiredConnection.alias)
-//        let statement = try Statement(innateConnection, Compiler.query(tables: [table], columns: [Address.Column(name: "id", table: table), Address.Column(name: "title", table: table), Address.Column(name: "data", table: table)], condition: ArrayLikeParallelCondition([Condition.Trio(lhs: .column(payload: Address.Column(name: "id")), rhs: .value(payload: 1), sign: .equal)]), environment: innateConnection.alias))
         let statement = try Statement(innateConnection, Compiler.query(tables: [table], columns: [Address.Column(name: "id", table: table), Address.Column(name: "title", table: table), Address.Column(name: "data", table: table)]))
 
         print(try statement.retrieve())

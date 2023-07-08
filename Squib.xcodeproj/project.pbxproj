@@ -23,6 +23,7 @@
 		7125C58D2A58F36F00BBEDE3 /* Tableable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7125C58C2A58F36F00BBEDE3 /* Tableable.swift */; };
 		7125C58F2A58F44300BBEDE3 /* Columnable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7125C58E2A58F44300BBEDE3 /* Columnable.swift */; };
 		7125C5912A58F65100BBEDE3 /* ColumnableTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7125C5902A58F65100BBEDE3 /* ColumnableTests.swift */; };
+		7125C5932A590E7000BBEDE3 /* MetatypeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7125C5922A590E7000BBEDE3 /* MetatypeManager.swift */; };
 		718DCD112A57CD7C005D4414 /* Squib.docc in Sources */ = {isa = PBXBuildFile; fileRef = 718DCD102A57CD7C005D4414 /* Squib.docc */; };
 		718DCD172A57CD7C005D4414 /* Squib.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 718DCD0C2A57CD7C005D4414 /* Squib.framework */; };
 		718DCD1C2A57CD7C005D4414 /* SquibTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 718DCD1B2A57CD7C005D4414 /* SquibTests.swift */; };
@@ -69,6 +70,7 @@
 		7125C58C2A58F36F00BBEDE3 /* Tableable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tableable.swift; sourceTree = "<group>"; };
 		7125C58E2A58F44300BBEDE3 /* Columnable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Columnable.swift; sourceTree = "<group>"; };
 		7125C5902A58F65100BBEDE3 /* ColumnableTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColumnableTests.swift; sourceTree = "<group>"; };
+		7125C5922A590E7000BBEDE3 /* MetatypeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetatypeManager.swift; sourceTree = "<group>"; };
 		718DCD0C2A57CD7C005D4414 /* Squib.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Squib.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		718DCD0F2A57CD7C005D4414 /* Squib.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Squib.h; sourceTree = "<group>"; };
 		718DCD102A57CD7C005D4414 /* Squib.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = Squib.docc; sourceTree = "<group>"; };
@@ -224,6 +226,7 @@
 				718DCD382A57DBAA005D4414 /* Knife.swift */,
 				718DCD3C2A57E7ED005D4414 /* Constant.swift */,
 				7125C5772A58634B00BBEDE3 /* Storehouse.swift */,
+				7125C5922A590E7000BBEDE3 /* MetatypeManager.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -366,6 +369,7 @@
 				7125C58D2A58F36F00BBEDE3 /* Tableable.swift in Sources */,
 				718DCD452A57EC7E005D4414 /* SquibError.swift in Sources */,
 				718DCD412A57E972005D4414 /* Statement.swift in Sources */,
+				7125C5932A590E7000BBEDE3 /* MetatypeManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -13,6 +13,7 @@ public enum SquibError: Error {
     
     case sqliteError(message: String, code: Int32)
     case plasticError(storableValue: (any Storable)?)
+    case commonError(_ message: String? = nil)
     
     
     init?(code: Int32, connection: Connection) {
