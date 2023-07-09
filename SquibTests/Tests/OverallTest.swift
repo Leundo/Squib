@@ -36,5 +36,6 @@ final class OverallTest: XCTestCase {
         let queriedBooks = try acquiredPowder.query(Book.self)
         XCTAssert(queriedBooks.contains(where: {$0.title == missingPerson.title}))
         XCTAssert(queriedBooks.contains(where: {$0.title == inThePenalColony.title}))
+        XCTAssert(queriedBooks.contains(missingPerson))
     }
 }

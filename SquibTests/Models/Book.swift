@@ -10,7 +10,7 @@ import Foundation
 
 
 struct Book: Explosive, Hashable {
-    @Columnable(idColumn, constraint: [.primaryKey, .autoIncrement])
+    @IgnoreHashableColumnable(idColumn, constraint: [.primaryKey, .autoIncrement])
     var id: Int = 0
     @Columnable(titleColumn, constraint: [.notNull])
     var title: String = ""

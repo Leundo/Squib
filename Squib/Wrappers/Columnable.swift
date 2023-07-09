@@ -55,9 +55,35 @@ extension Columnable: Hashable where Value: Hashable {
     }
 }
 
-//@propertyWrapper
-//public struct IgnoreHashableColumnable<Value: Fluctuating>: ColumnableBridge {
-//}
+
+@propertyWrapper
+public struct IgnoreHashableColumnable<Value: Fluctuating>: ColumnableBridge, Hashable {
+    let constraint: Constraint.Column
+    let name: String
+    let valueType: Any.Type
+    var value: any Fluctuating
+    
+    public var wrappedValue: Value {
+        get {
+            return value as! Value
+        }
+        set {
+            value = newValue
+        }
+    }
+    
+    public init(wrappedValue value: Value, _ name: String, constraint: Constraint.Column = Constraint.Column(rawValue: 0)) {
+        self.value = value
+        self.constraint = constraint
+        self.name = name
+        self.valueType = Value.self
+    }
+    public static func == (lhs: IgnoreHashableColumnable<Value>, rhs: IgnoreHashableColumnable<Value>) -> Bool {
+        true
+    }
+    public func hash(into hasher: inout Hasher) {}
+}
+
 
 @propertyWrapper
 internal struct IgnoreEquatable<Wrapped>: Equatable {
