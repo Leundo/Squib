@@ -48,32 +48,3 @@ extension Optional: Expressive where Wrapped: Expressive {
         return "NULL"
     }
 }
-
-
-public enum Canister: Expressive {
-    case column(payload: Address.Column)
-    case value(payload: any Expressive)
-    
-    public var incantation: String {
-        switch self {
-        case let .value(payload):
-            return payload.incantation
-        case let .column(payload):
-            return payload.incantation
-        }
-    }
-    public func weave(_ environment: String?) -> String {
-        switch self {
-        case let .value(payload):
-            return payload.incantation
-        case let .column(payload):
-            return payload.weave(environment)
-        }
-    }
-    public var isValue: Bool {
-        if case .value = self {
-            return true
-        }
-        return false
-    }
-}

@@ -18,6 +18,7 @@ public class Powder {
 }
 
 
+// MARK: Attach, Create & Drop
 extension Powder {
     public func execute(_ sqls: [String]) throws {
         try connection.execute(sqls)
@@ -40,7 +41,11 @@ extension Powder {
     public func drop<T: Tableable>(_ C: T.Type) throws {
         try execute(Compiler.drop(table: C.tableInfo.table))
     }
-    
+}
+
+
+// MARK: - Query
+extension Powder {
     public func query<T: Tableable & Rebuildable>(_ C: T.Type, condition: Condition? = nil, limitation: Limitation? = nil) throws -> [T] {
         let columns = T.detailTableInfo.columns
         let retrievedRows = try Statement(connection, Compiler.query(tables: [T.tableInfo.table], columns: columns, condition: condition, limitation: limitation, environment: connection.alias)).retrieve()
@@ -57,10 +62,28 @@ extension Powder {
         let retrievedRows = try Statement(connection, Compiler.query(tables: [T.tableInfo.table], columns: targetColumns, condition: condition, limitation: limitation, environment: connection.alias)).retrieve()
         return try Array<T>.from(retrievedRows, rebuildColumns)
     }
-    
+}
+
+
+// MARK: - Replace & Delete
+extension Powder {
     public func replace<T: Tableable & Reflectable>(_ object: T, _ key: ColumnKey = .notPrimary) throws {
         let columns = T.columnDictionary[key]!
         try Statement(connection, Compiler.replace(table: T.detailTableInfo.table, columns: columns, environment: connection.alias)).run(object.getReflectedValues(columns))
+    }
+    
+    public func replace<T: Tableable & Reflectable, Sequence1: Sequence<T>>(_ objects: Sequence1, _ key: ColumnKey = .notPrimary) throws {
+        let columns = T.columnDictionary[key]!
+        let statement = try Statement(connection, Compiler.replace(table: T.detailTableInfo.table, columns: columns, environment: connection.alias))
+        for object in objects {
+            try statement.run(object.getReflectedValues(columns))
+        }
+    }
+    
+    public func delete<T: Tableable & Reflectable>(_ object: T, _ key: ColumnKey = .primary) throws {
+        let columns = T.columnDictionary[key]!
+//        try Statement(connection, Compiler.delete(table: T.tableInfo.table, condition: Condition(), environment: connection.alias)).run(object.getReflectedValues(columns))
+//        var condition = ArrayLikeParallelCondition(columns: columns).bind(object.getReflectedValues(columns))
     }
 }
 

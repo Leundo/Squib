@@ -25,17 +25,18 @@ final class OverallTest: XCTestCase {
     }
     
     func test0() throws {
-        let missingPerson = Book(id: 0, title: "暗店街", author: "莫迪亚诺", price: 23.5, page: 400, data: Data([110, 110, 110]))
+        var missingPerson = Book(id: 0, title: "暗店街", author: "莫迪亚诺", price: 23.5, page: 400, data: Data([110, 110, 110]))
         let inThePenalColony = Book(id: 0, title: "在流放地", author: "卡夫卡", price: 13.5, page: nil, data: nil)
         
         try acquiredPowder.drop(Book.self)
         try acquiredPowder.create(Book.self)
+        try acquiredPowder.replace([missingPerson, inThePenalColony])
+        missingPerson.data = nil
         try acquiredPowder.replace(missingPerson)
-        try acquiredPowder.replace(inThePenalColony)
         
         let queriedBooks = try acquiredPowder.query(Book.self)
         XCTAssert(queriedBooks.contains(where: {$0.title == missingPerson.title}))
-        XCTAssert(queriedBooks.contains(where: {$0.title == inThePenalColony.title}))
+        XCTAssert(queriedBooks.contains(inThePenalColony))
         XCTAssert(queriedBooks.contains(missingPerson))
     }
 }

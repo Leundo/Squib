@@ -15,12 +15,15 @@ public class Condition: Expressive {
     public func weave(_ environment: String?) -> String {
         fatalError("weave has not been implemented")
     }
-    public func bind(_ values: (any Expressive)...) -> Condition {
+    @discardableResult public func bind(_ values: (any Expressive)...) -> Condition {
         return bind(values)
     }
-    public func bind(_ values: [any Expressive]) -> Condition {
+    @discardableResult public func bind(_ values: [any Expressive]) -> Condition {
         if values.isEmpty { return self }
         fatalError("bind has not been implemented")
+    }
+    @discardableResult public func reset() -> Condition {
+        fatalError("reset has not been implemented")
     }
 }
 
@@ -33,6 +36,47 @@ extension Condition {
         case greaterThanOrEqual = ">="
         case lessThan = "<"
         case lessThanOrEqual = "<="
+    }
+    
+    public enum Canister: Expressive {
+        case column(payload: Address.Column)
+        case value(payload: any Expressive)
+        case placeholder(payload: any Expressive, isBound: Bool)
+        
+        public var incantation: String {
+            switch self {
+            case let .value(payload):
+                return payload.incantation
+            case let .placeholder(payload, isBound):
+                guard isBound else { return "?" }
+                return payload.incantation
+            case let .column(payload):
+                return payload.incantation
+            }
+        }
+        public func weave(_ environment: String?) -> String {
+            switch self {
+            case let .value(payload):
+                return payload.incantation
+            case let .placeholder(payload, isBound):
+                guard isBound else { return "?" }
+                return payload.incantation
+            case let .column(payload):
+                return payload.weave(environment)
+            }
+        }
+        public var isValue: Bool {
+            if case .value = self {
+                return true
+            }
+            return false
+        }
+        public var isPlaceholder: Bool {
+            if case .placeholder = self {
+                return true
+            }
+            return false
+        }
     }
     
     public struct Trio: Expressive {
@@ -78,23 +122,31 @@ public class ArrayLikeParallelCondition: ParallelCondition {
     private lazy var valueCount: Int = {
         return trios.map { ($0.lhs.isValue ? 1 : 0) + ($0.rhs.isValue ? 1 : 0) }.reduce(0, +)
     }()
+    private lazy var placeholderCount: Int = {
+        return trios.map { ($0.lhs.isPlaceholder ? 1 : 0) + ($0.rhs.isPlaceholder ? 1 : 0) }.reduce(0, +)
+    }()
+    
     
     public init(_ trios: [Trio]) {
         self._trios = trios
     }
     
+    public init(columns: [Address.Column], _ comparator: Comparator = .equal) {
+        self._trios = columns.map { Trio(lhs: .placeholder(payload: "", isBound: false), rhs: .column(payload: $0), sign: comparator) }
+    }
+    
     public override func bind(_ values: [any Expressive]) -> Condition {
-        if values.count != valueCount {
-            fatalError("there are \(valueCount) values in condition, but \(values.count) in argument")
+        if values.count != placeholderCount {
+            fatalError("there are \(placeholderCount) placeholder in condition, but \(values.count) in argument")
         }
         var index = 0
         for group in 0..<_trios.count {
-            if _trios[group].lhs.isValue {
-                _trios[group].lhs = .value(payload: values[index])
+            if _trios[group].lhs.isPlaceholder {
+                _trios[group].lhs = .placeholder(payload: values[index], isBound: true)
                 index += 1
             }
-            if _trios[group].rhs.isValue {
-                _trios[group].rhs = .value(payload: values[index])
+            if _trios[group].rhs.isPlaceholder {
+                _trios[group].rhs = .placeholder(payload: values[index], isBound: true)
                 index += 1
             }
         }
