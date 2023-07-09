@@ -44,7 +44,7 @@ extension Tableable {
         }
     }
     
-    public static var columnDictionary: [ColumnKey: [Address.Column]] {
+    public static var columnDictionary: [Powder.ColumnKey: [Address.Column]] {
         get {
             let allColumns = detailTableInfo.columnDescriptions.map{$0.name}
             let primaryColumns = Array(Set(detailTableInfo.columnDescriptions.filter {
@@ -82,17 +82,18 @@ extension Tableable {
 public protocol Explosive: Tableable, Reflectable, Rebuildable {}
 
 // MARK: - Key
-public enum ColumnKey: Hashable {
-    case primary
-    case notPrimary
-    case tableUnique
-    case notTableUnique
-    case customized(value: Int)
-    
-    public init(_ value: Int) {
-        self = ColumnKey.customized(value: value)
-    }
-}
+// Move to Powder
+//public enum ColumnKey: Hashable {
+//    case primary
+//    case notPrimary
+//    case tableUnique
+//    case notTableUnique
+//    case customized(value: Int)
+//
+//    public init(_ value: Int) {
+//        self = ColumnKey.customized(value: value)
+//    }
+//}
 
 
 // MARK: - TableInfo

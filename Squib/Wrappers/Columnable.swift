@@ -55,6 +55,9 @@ extension Columnable: Hashable where Value: Hashable {
     }
 }
 
+//@propertyWrapper
+//public struct IgnoreHashableColumnable<Value: Fluctuating>: ColumnableBridge {
+//}
 
 @propertyWrapper
 internal struct IgnoreEquatable<Wrapped>: Equatable {
