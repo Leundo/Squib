@@ -28,6 +28,12 @@ extension Connection {
             try check(sqlite3_exec(handle, $0, nil, nil, nil))
         }
     }
+    
+    public func execute(_ sqls: String...) throws {
+        if !sqls.isEmpty {
+            try execute(sqls)
+        }
+    }
 }
 
 

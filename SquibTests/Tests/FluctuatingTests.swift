@@ -15,6 +15,9 @@ final class FluctuatingTests: XCTestCase {
     lazy var innateConnection = try! Connection(.path(value: Bundle(for: FluctuatingTests.self).path(forResource: "innate", ofType: "db")!), "innate")
     lazy var acquiredConnection = try! Connection(.path(value: NSHomeDirectory() + "/Documents/acquired.db"), "acquired")
     
+    lazy var innatePodwer = Powder(connection: innateConnection)
+    lazy var acquiredPowder = Powder(connection: acquiredConnection)
+    
     override func setUpWithError() throws {
         print(NSHomeDirectory())
     }
@@ -43,6 +46,13 @@ final class FluctuatingTests: XCTestCase {
         
         let retrievedFoo = try Array<Foo>.from(try querying.retrieve(), Foo.columnDictionary[.notPrimary]!)[0]
         XCTAssert(retrievedFoo == foo)
+        
+        var retrievedFoo2 = try acquiredPowder.query(Foo.self)[0]
+        retrievedFoo2.id = 0
+        XCTAssert(retrievedFoo2 == foo)
+    }
+    
+    func testPowder() throws {
     }
 }
 

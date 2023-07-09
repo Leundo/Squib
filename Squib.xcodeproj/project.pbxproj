@@ -30,6 +30,8 @@
 		7179DA4F2A59CB0C00F883DB /* JSONDataCodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7179DA4E2A59CB0C00F883DB /* JSONDataCodable.swift */; };
 		7179DA512A59CB3700F883DB /* AESEncryptable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7179DA502A59CB3700F883DB /* AESEncryptable.swift */; };
 		7179DA552A59D55100F883DB /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 7179DA542A59D55100F883DB /* README.md */; };
+		7179DA572A5A2ED800F883DB /* Powder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7179DA562A5A2ED800F883DB /* Powder.swift */; };
+		7179DA592A5A32A100F883DB /* PowderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7179DA582A5A32A100F883DB /* PowderTests.swift */; };
 		718DCD112A57CD7C005D4414 /* Squib.docc in Sources */ = {isa = PBXBuildFile; fileRef = 718DCD102A57CD7C005D4414 /* Squib.docc */; };
 		718DCD172A57CD7C005D4414 /* Squib.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 718DCD0C2A57CD7C005D4414 /* Squib.framework */; };
 		718DCD1D2A57CD7C005D4414 /* Squib.h in Headers */ = {isa = PBXBuildFile; fileRef = 718DCD0F2A57CD7C005D4414 /* Squib.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -82,6 +84,8 @@
 		7179DA4E2A59CB0C00F883DB /* JSONDataCodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONDataCodable.swift; sourceTree = "<group>"; };
 		7179DA502A59CB3700F883DB /* AESEncryptable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AESEncryptable.swift; sourceTree = "<group>"; };
 		7179DA542A59D55100F883DB /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		7179DA562A5A2ED800F883DB /* Powder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Powder.swift; sourceTree = "<group>"; };
+		7179DA582A5A32A100F883DB /* PowderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PowderTests.swift; sourceTree = "<group>"; };
 		718DCD0C2A57CD7C005D4414 /* Squib.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Squib.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		718DCD0F2A57CD7C005D4414 /* Squib.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Squib.h; sourceTree = "<group>"; };
 		718DCD102A57CD7C005D4414 /* Squib.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = Squib.docc; sourceTree = "<group>"; };
@@ -150,6 +154,7 @@
 			children = (
 				7125C5952A594E5300BBEDE3 /* CompilerTests.swift */,
 				71AC8B562A597CFC0038811B /* FluctuatingTests.swift */,
+				7179DA582A5A32A100F883DB /* PowderTests.swift */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -238,6 +243,7 @@
 				7125C57F2A587C7900BBEDE3 /* Limitation.swift */,
 				7125C5812A58D89700BBEDE3 /* Address.swift */,
 				7125C58A2A58EBF100BBEDE3 /* Constraint.swift */,
+				7179DA562A5A2ED800F883DB /* Powder.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -380,6 +386,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7125C57C2A586B4900BBEDE3 /* Condition.swift in Sources */,
+				7179DA572A5A2ED800F883DB /* Powder.swift in Sources */,
 				718DCD432A57E9D7005D4414 /* Connection.swift in Sources */,
 				718DCD3F2A57E913005D4414 /* Bindable.swift in Sources */,
 				7149B9402A599DE0005EB346 /* Data+.swift in Sources */,
@@ -416,6 +423,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7179DA592A5A32A100F883DB /* PowderTests.swift in Sources */,
 				7125C5872A58DD1E00BBEDE3 /* Book.swift in Sources */,
 				7125C5962A594E5300BBEDE3 /* CompilerTests.swift in Sources */,
 				71AC8B572A597CFC0038811B /* FluctuatingTests.swift in Sources */,
