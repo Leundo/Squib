@@ -19,10 +19,10 @@ extension Constraint {
             self.rawValue = rawValue
         }
         
-        static let notNull = Column(rawValue: 1 << 0)
-        static let primaryKey = Column(rawValue: 1 << 1)
-        static let autoIncrement = Column(rawValue: 1 << 2)
-        static let unique = Column(rawValue: 1 << 3)
+        public static let notNull = Column(rawValue: 1 << 0)
+        public static let primaryKey = Column(rawValue: 1 << 1)
+        public static let autoIncrement = Column(rawValue: 1 << 2)
+        public static let unique = Column(rawValue: 1 << 3)
         
         public var incantation: String {
             var expression = ""

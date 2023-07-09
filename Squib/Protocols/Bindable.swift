@@ -35,6 +35,9 @@ extension Date: StringBindable {}
 
 extension Int64: Int64Bindable {}
 extension Int: Int64Bindable {}
+extension Int32: Int64Bindable {}
+extension Int16: Int64Bindable {}
+extension Int8: Int64Bindable {}
 extension Bool: Int64Bindable {}
 
 extension Double: DoubleBindable {}

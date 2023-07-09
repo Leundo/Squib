@@ -11,7 +11,7 @@ import Foundation
 public class Powder {
     public fileprivate(set) var connection: Connection
     
-    init(connection: Connection) {
+    public init(connection: Connection) {
         self.connection = connection
     }
     

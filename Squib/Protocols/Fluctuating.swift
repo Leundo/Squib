@@ -20,6 +20,33 @@ extension Int: Fluctuating {
 }
 
 
+extension Int32: Fluctuating {
+    public var storedValue: Int64? { return Int64(self) }
+    public var incantation: String { return self.storedValue.incantation }
+    public static func from(_ storableValue: (any Storable)?) throws -> Int32 {
+        return Int32(try Int64.from(storableValue))
+    }
+}
+
+
+extension Int16: Fluctuating {
+    public var storedValue: Int64? { return Int64(self) }
+    public var incantation: String { return self.storedValue.incantation }
+    public static func from(_ storableValue: (any Storable)?) throws -> Int16 {
+        return Int16(try Int64.from(storableValue))
+    }
+}
+
+
+extension Int8: Fluctuating {
+    public var storedValue: Int64? { return Int64(self) }
+    public var incantation: String { return self.storedValue.incantation }
+    public static func from(_ storableValue: (any Storable)?) throws -> Int8 {
+        return Int8(try Int64.from(storableValue))
+    }
+}
+
+
 extension Bool: Fluctuating {
     public var storedValue: Int64? { return self ? 1 : 0 }
     public var incantation: String { return self.storedValue.incantation }
