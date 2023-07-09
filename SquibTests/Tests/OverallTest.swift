@@ -34,9 +34,20 @@ final class OverallTest: XCTestCase {
         missingPerson.data = nil
         try acquiredPowder.replace(missingPerson)
         
-        let queriedBooks = try acquiredPowder.query(Book.self)
+        var queriedBooks = try acquiredPowder.query(Book.self)
         XCTAssert(queriedBooks.contains(where: {$0.title == missingPerson.title}))
         XCTAssert(queriedBooks.contains(inThePenalColony))
         XCTAssert(queriedBooks.contains(missingPerson))
+        
+        try acquiredPowder.delete(queriedBooks.first(where: {$0.title == missingPerson.title})!, .primary)
+        queriedBooks = try acquiredPowder.query(Book.self)
+        XCTAssert(!queriedBooks.contains(missingPerson))
+        
+        try acquiredPowder.drop(Book.self)
+        try acquiredPowder.create(Book.self)
+        try acquiredPowder.replace([missingPerson, inThePenalColony])
+        queriedBooks = try acquiredPowder.query(Book.self)
+        try acquiredPowder.delete([queriedBooks.first(where: {$0.title == missingPerson.title})!, queriedBooks.first(where: {$0.title == inThePenalColony.title})!])
+        XCTAssert((try acquiredPowder.query(Book.self)).count == 0)
     }
 }

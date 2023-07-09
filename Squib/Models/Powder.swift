@@ -65,7 +65,7 @@ extension Powder {
 }
 
 
-// MARK: - Replace & Delete
+// MARK: - Replace, Update & Delete
 extension Powder {
     public func replace<T: Tableable & Reflectable>(_ object: T, _ key: ColumnKey = .notPrimary) throws {
         let columns = T.columnDictionary[key]!
@@ -80,10 +80,22 @@ extension Powder {
         }
     }
     
+//    public func update<T: Tableable & Reflectable>(_ object: T, _ key: ColumnKey = .notPrimary) throws {
+//        
+//    }
+    
     public func delete<T: Tableable & Reflectable>(_ object: T, _ key: ColumnKey = .primary) throws {
         let columns = T.columnDictionary[key]!
-//        try Statement(connection, Compiler.delete(table: T.tableInfo.table, condition: Condition(), environment: connection.alias)).run(object.getReflectedValues(columns))
-//        var condition = ArrayLikeParallelCondition(columns: columns).bind(object.getReflectedValues(columns))
+        let condition = ArrayLikeParallelCondition(columns: columns).bind(object.getReflectedValues(columns))
+        try Statement(connection, Compiler.delete(table: T.tableInfo.table, condition: condition, environment: connection.alias)).run()
+    }
+    
+    public func delete<T: Tableable & Reflectable, Sequence1: Sequence<T>>(_ objects: Sequence1, _ key: ColumnKey = .primary) throws {
+        let columns = T.columnDictionary[key]!
+        let condition = ArrayLikeParallelCondition(columns: columns)
+        for object in objects {
+            try Statement(connection, Compiler.delete(table: T.tableInfo.table, condition: condition.bind(object.getReflectedValues(columns)), environment: connection.alias)).run()
+        }
     }
 }
 

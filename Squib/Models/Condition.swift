@@ -15,10 +15,10 @@ public class Condition: Expressive {
     public func weave(_ environment: String?) -> String {
         fatalError("weave has not been implemented")
     }
-    @discardableResult public func bind(_ values: (any Expressive)...) -> Condition {
+    @discardableResult public func bind(_ values: ((any Expressive)?)...) -> Condition {
         return bind(values)
     }
-    @discardableResult public func bind(_ values: [any Expressive]) -> Condition {
+    @discardableResult public func bind(_ values: [(any Expressive)?]) -> Condition {
         if values.isEmpty { return self }
         fatalError("bind has not been implemented")
     }
@@ -135,18 +135,22 @@ public class ArrayLikeParallelCondition: ParallelCondition {
         self._trios = columns.map { Trio(lhs: .placeholder(payload: "", isBound: false), rhs: .column(payload: $0), sign: comparator) }
     }
     
-    public override func bind(_ values: [any Expressive]) -> Condition {
+    public override func bind(_ values: [(any Expressive)?]) -> Condition {
         if values.count != placeholderCount {
             fatalError("there are \(placeholderCount) placeholder in condition, but \(values.count) in argument")
         }
         var index = 0
         for group in 0..<_trios.count {
             if _trios[group].lhs.isPlaceholder {
-                _trios[group].lhs = .placeholder(payload: values[index], isBound: true)
+                if let value = values[index] {
+                    _trios[group].lhs = .placeholder(payload: value, isBound: true)
+                }
                 index += 1
             }
             if _trios[group].rhs.isPlaceholder {
-                _trios[group].rhs = .placeholder(payload: values[index], isBound: true)
+                if let value = values[index] {
+                    _trios[group].rhs = .placeholder(payload: value, isBound: true)
+                }
                 index += 1
             }
         }
