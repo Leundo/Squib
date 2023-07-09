@@ -26,7 +26,9 @@ final class OverallTest: XCTestCase {
     
     func test0() throws {
         var missingPerson = Book(id: 0, title: "暗店街", author: "莫迪亚诺", price: 23.5, page: 400, data: Data([110, 110, 110]))
-        let inThePenalColony = Book(id: 0, title: "在流放地", author: "卡夫卡", price: 13.5, page: nil, data: nil)
+        var inThePenalColony = Book(id: 0, title: "在流放地", author: "卡夫卡", price: 13.5, page: nil, data: nil)
+        
+        // Line 0
         
         try acquiredPowder.drop(Book.self)
         try acquiredPowder.create(Book.self)
@@ -38,10 +40,12 @@ final class OverallTest: XCTestCase {
         XCTAssert(queriedBooks.contains(where: {$0.title == missingPerson.title}))
         XCTAssert(queriedBooks.contains(inThePenalColony))
         XCTAssert(queriedBooks.contains(missingPerson))
-        
+                
         try acquiredPowder.delete(queriedBooks.first(where: {$0.title == missingPerson.title})!, .primary)
         queriedBooks = try acquiredPowder.query(Book.self)
         XCTAssert(!queriedBooks.contains(missingPerson))
+        
+        // Line 1
         
         try acquiredPowder.drop(Book.self)
         try acquiredPowder.create(Book.self)
@@ -49,5 +53,30 @@ final class OverallTest: XCTestCase {
         queriedBooks = try acquiredPowder.query(Book.self)
         try acquiredPowder.delete([queriedBooks.first(where: {$0.title == missingPerson.title})!, queriedBooks.first(where: {$0.title == inThePenalColony.title})!])
         XCTAssert((try acquiredPowder.query(Book.self)).count == 0)
+        
+        // Line 2
+        
+        try acquiredPowder.drop(Book.self)
+        try acquiredPowder.create(Book.self)
+        try acquiredPowder.replace([missingPerson, inThePenalColony])
+        missingPerson.id = (try acquiredPowder.query(Book.self)).first(where: {$0.title == missingPerson.title})!.id
+        missingPerson.price = 10.0
+        try acquiredPowder.update(missingPerson, .notPrimary)
+        queriedBooks = try acquiredPowder.query(Book.self)
+        XCTAssert(queriedBooks.contains(missingPerson))
+        
+        // Line 3
+        
+        try acquiredPowder.drop(Book.self)
+        try acquiredPowder.create(Book.self)
+        try acquiredPowder.replace([missingPerson, inThePenalColony])
+        missingPerson.id = (try acquiredPowder.query(Book.self)).first(where: {$0.title == missingPerson.title})!.id
+        inThePenalColony.id = (try acquiredPowder.query(Book.self)).first(where: {$0.title == inThePenalColony.title})!.id
+        missingPerson.price = 10.0
+        inThePenalColony.price = 120.0
+        try acquiredPowder.update([missingPerson, inThePenalColony], .notPrimary)
+        queriedBooks = try acquiredPowder.query(Book.self)
+        XCTAssert(queriedBooks.contains(missingPerson))
+        XCTAssert(queriedBooks.contains(inThePenalColony))
     }
 }

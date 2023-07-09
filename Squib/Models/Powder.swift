@@ -65,24 +65,22 @@ extension Powder {
 }
 
 
-// MARK: - Replace, Update & Delete
+// MARK: - Replace & Delete
 extension Powder {
     public func replace<T: Tableable & Reflectable>(_ object: T, _ key: ColumnKey = .notPrimary) throws {
         let columns = T.columnDictionary[key]!
         try Statement(connection, Compiler.replace(table: T.detailTableInfo.table, columns: columns, environment: connection.alias)).run(object.getReflectedValues(columns))
     }
     
+    
     public func replace<T: Tableable & Reflectable, Sequence1: Sequence<T>>(_ objects: Sequence1, _ key: ColumnKey = .notPrimary) throws {
         let columns = T.columnDictionary[key]!
-        let statement = try Statement(connection, Compiler.replace(table: T.detailTableInfo.table, columns: columns, environment: connection.alias))
+        let statement = try Statement(connection, Compiler.replace(table: T.tableInfo.table, columns: columns, environment: connection.alias))
         for object in objects {
             try statement.run(object.getReflectedValues(columns))
         }
     }
     
-//    public func update<T: Tableable & Reflectable>(_ object: T, _ key: ColumnKey = .notPrimary) throws {
-//        
-//    }
     
     public func delete<T: Tableable & Reflectable>(_ object: T, _ key: ColumnKey = .primary) throws {
         let columns = T.columnDictionary[key]!
@@ -90,11 +88,44 @@ extension Powder {
         try Statement(connection, Compiler.delete(table: T.tableInfo.table, condition: condition, environment: connection.alias)).run()
     }
     
+    
     public func delete<T: Tableable & Reflectable, Sequence1: Sequence<T>>(_ objects: Sequence1, _ key: ColumnKey = .primary) throws {
         let columns = T.columnDictionary[key]!
         let condition = ArrayLikeParallelCondition(columns: columns)
         for object in objects {
             try Statement(connection, Compiler.delete(table: T.tableInfo.table, condition: condition.bind(object.getReflectedValues(columns)), environment: connection.alias)).run()
+        }
+    }
+}
+
+
+// MARK: - Update
+extension Powder {
+    public func update<T: Tableable & Reflectable>(_ object: T, _ key: ColumnKey = .notPrimary, condition: Condition) throws {
+        let columns = T.columnDictionary[key]!
+        try Statement(connection, Compiler.update(table: T.tableInfo.table, columns: columns, condition: condition, environment: connection.alias)).run(object.getReflectedValues(columns))
+    }
+    
+    public func update<T: Tableable & Reflectable, Sequence1: Sequence<T>>(_ objects: Sequence1, _ key: ColumnKey = .notPrimary, condition: Condition) throws {
+        let columns = T.columnDictionary[key]!
+        for object in objects {
+            try Statement(connection, Compiler.update(table: T.tableInfo.table, columns: columns, condition: condition, environment: connection.alias)).run(object.getReflectedValues(columns))
+        }
+    }
+    
+    public func update<T: Tableable & Reflectable>(_ object: T, _ key: ColumnKey = .notPrimary, conditionColumnKey: ColumnKey = .primary, comparator: Condition.Comparator = .equal) throws {
+        let columns = T.columnDictionary[key]!
+        let conditionColumns = T.columnDictionary[conditionColumnKey]!
+        let condition = ArrayLikeParallelCondition(columns: conditionColumns, comparator).bind(object.getReflectedValues(conditionColumns))
+        try Statement(connection, Compiler.update(table: T.tableInfo.table, columns: columns, condition: condition, environment: connection.alias)).run(object.getReflectedValues(columns))
+    }
+    
+    public func update<T: Tableable & Reflectable, Sequence1: Sequence<T>>(_ objects: Sequence1, _ key: ColumnKey = .notPrimary, conditionColumnKey: ColumnKey = .primary, comparator: Condition.Comparator = .equal) throws {
+        let columns = T.columnDictionary[key]!
+        let conditionColumns = T.columnDictionary[conditionColumnKey]!
+        let condition = ArrayLikeParallelCondition(columns: conditionColumns, comparator)
+        for object in objects {
+            try Statement(connection, Compiler.update(table: T.tableInfo.table, columns: columns, condition: condition.bind(object.getReflectedValues(conditionColumns)), environment: connection.alias)).run(object.getReflectedValues(columns))
         }
     }
 }
