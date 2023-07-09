@@ -9,11 +9,24 @@ import Foundation
 
 
 public class Condition: Expressive {
-    public var incantation: String {
+    fileprivate var incantationWithoutHead: String {
         fatalError("incantation has not been implemented")
     }
-    public func weave(_ environment: String?) -> String {
+    fileprivate func weaveWithoutHead(_ environment: String?) -> String {
         fatalError("weave has not been implemented")
+    }
+    public var incantation: String {
+        if incantationWithoutHead.trimmingCharacters(in: .whitespacesAndNewlines) == "" {
+            return ""
+        }
+        return "WHERE " + incantationWithoutHead
+    }
+    public func weave(_ environment: String?) -> String {
+        let weavedIncantation = weaveWithoutHead(environment).trimmingCharacters(in: .whitespacesAndNewlines)
+        if weavedIncantation == "" {
+            return ""
+        }
+        return "WHERE " + weavedIncantation
     }
     @discardableResult public func bind(_ values: ((any Expressive)?)...) -> Condition {
         return bind(values)
@@ -36,6 +49,11 @@ extension Condition {
         case greaterThanOrEqual = ">="
         case lessThan = "<"
         case lessThanOrEqual = "<="
+    }
+    
+    public enum Logic: String {
+        case and = " AND "
+        case or = " OR "
     }
     
     public enum Canister: Expressive {
@@ -96,19 +114,23 @@ extension Condition {
 
  
 public class ParallelCondition: Condition {
+    public var logic: Logic
     public var trios: [Trio] {
         fatalError("trios has not been implemented")
     }
     
-    public override var incantation: String {
+    init(logic: Logic = .and) {
+        self.logic = logic
+    }
+    fileprivate override var incantationWithoutHead: String {
         if trios.count > 0 {
-            return "WHERE " + Knife.concat(trios.map {$0.incantation}, delimiter: " AND ")
+            return "(" + Knife.concat(trios.map {$0.incantation}, delimiter: logic.rawValue) + ")"
         }
         return ""
     }
-    public override func weave(_ environment: String?) -> String {
+    fileprivate override func weaveWithoutHead(_ environment: String?) -> String {
         if trios.count > 0 {
-            return "WHERE " + Knife.concat(trios.map {$0.weave(environment)}, delimiter: " AND ")
+            return "(" + Knife.concat(trios.map {$0.weave(environment)}, delimiter: logic.rawValue) + ")"
         }
         return ""
     }
@@ -127,12 +149,14 @@ public class ArrayLikeParallelCondition: ParallelCondition {
     }()
     
     
-    public init(_ trios: [Trio]) {
+    public init(_ trios: [Trio], _ logic: Logic = .and) {
         self._trios = trios
+        super.init(logic: logic)
     }
     
-    public init(columns: [Address.Column], _ comparator: Comparator = .equal) {
+    public init(columns: [Address.Column], _ comparator: Comparator = .equal, _ logic: Logic = .and) {
         self._trios = columns.map { Trio(lhs: .placeholder(payload: "", isBound: false), rhs: .column(payload: $0), sign: comparator) }
+        super.init(logic: logic)
     }
     
     public override func bind(_ values: [(any Expressive)?]) -> Condition {

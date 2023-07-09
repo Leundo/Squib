@@ -61,7 +61,7 @@ final class OverallTest: XCTestCase {
         try acquiredPowder.replace([missingPerson, inThePenalColony])
         missingPerson.id = (try acquiredPowder.query(Book.self)).first(where: {$0.title == missingPerson.title})!.id
         missingPerson.price = 10.0
-        try acquiredPowder.update(missingPerson, .notPrimary)
+        try acquiredPowder.update(missingPerson, .notPrimary, conditionColumnKey: .tableUnique)
         queriedBooks = try acquiredPowder.query(Book.self)
         XCTAssert(queriedBooks.contains(missingPerson))
         
