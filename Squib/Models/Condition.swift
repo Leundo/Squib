@@ -32,7 +32,7 @@ public class Condition: Expressive {
         return bind(values)
     }
     @discardableResult public func bind(_ values: [(any Expressive)?]) -> Condition {
-        if values.isEmpty { return self }
+//        if values.isEmpty { return self }
         fatalError("bind has not been implemented")
     }
     @discardableResult public func reset() -> Condition {
@@ -131,6 +131,29 @@ public class ParallelCondition: Condition {
     fileprivate override func weaveWithoutHead(_ environment: String?) -> String {
         if trios.count > 0 {
             return "(" + Knife.concat(trios.map {$0.weave(environment)}, delimiter: logic.rawValue) + ")"
+        }
+        return ""
+    }
+}
+
+
+public class ParallelBagCondition: Condition {
+    public var logic: Logic
+    public var condtions: [Condition]
+    
+    init(condtions: [Condition], _ logic: Logic = .and) {
+        self.condtions = condtions
+        self.logic = logic
+    }
+    fileprivate override var incantationWithoutHead: String {
+        if condtions.count > 0 {
+            return "(" + Knife.concat(condtions.map {$0.incantationWithoutHead}, delimiter: logic.rawValue) + ")"
+        }
+        return ""
+    }
+    fileprivate override func weaveWithoutHead(_ environment: String?) -> String {
+        if condtions.count > 0 {
+            return "(" + Knife.concat(condtions.map {$0.weaveWithoutHead(environment)}, delimiter: logic.rawValue) + ")"
         }
         return ""
     }

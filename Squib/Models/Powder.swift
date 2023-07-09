@@ -113,6 +113,39 @@ extension Powder {
         }
     }
     
+    public func update<T: Tableable & Reflectable>(_ object: T, _ key: ColumnKey = .notPrimary, conditionKey: ConditionKey, conditionColumnKey: ColumnKey? = nil) throws {
+        let columns = T.columnDictionary[key]!
+        var conditionColumns: [Address.Column]? = nil
+        if let conditionColumnKey = conditionColumnKey {
+            conditionColumns = T.columnDictionary[conditionColumnKey]!
+        }
+        var condition: Condition = T.conditionDictionary[conditionKey]!
+        if let conditionColumns = conditionColumns {
+            condition.bind(object.getReflectedValues(conditionColumns))
+        } else {
+            condition.bind([])
+        }
+        try Statement(connection, Compiler.update(table: T.tableInfo.table, columns: columns, condition: condition, environment: connection.alias)).run(object.getReflectedValues(columns))
+    }
+    
+    public func update<T: Tableable & Reflectable, Sequence1: Sequence<T>>(_ objects: Sequence1, _ key: ColumnKey = .notPrimary, conditionKey: ConditionKey, conditionColumnKey: ColumnKey? = nil) throws {
+        let columns = T.columnDictionary[key]!
+        var conditionColumns: [Address.Column]? = nil
+        if let conditionColumnKey = conditionColumnKey {
+            conditionColumns = T.columnDictionary[conditionColumnKey]!
+        }
+        var condition: Condition = T.conditionDictionary[conditionKey]!
+        if let conditionColumns = conditionColumns {
+            for object in objects {
+                try Statement(connection, Compiler.update(table: T.tableInfo.table, columns: columns, condition: condition.bind(object.getReflectedValues(conditionColumns)), environment: connection.alias)).run(object.getReflectedValues(columns))
+            }
+        } else {
+            for object in objects {
+                try Statement(connection, Compiler.update(table: T.tableInfo.table, columns: columns, condition: condition.bind([]), environment: connection.alias)).run(object.getReflectedValues(columns))
+            }
+        }
+    }
+    
     public func update<T: Tableable & Reflectable>(_ object: T, _ key: ColumnKey = .notPrimary, conditionColumnKey: ColumnKey = .primary, comparator: Condition.Comparator = .equal) throws {
         let columns = T.columnDictionary[key]!
         let conditionColumns = T.columnDictionary[conditionColumnKey]!
@@ -141,6 +174,14 @@ extension Powder {
         
         public init(_ value: Int) {
             self = ColumnKey.customized(value: value)
+        }
+    }
+    
+    public enum ConditionKey: Hashable {
+        case customized(value: Int)
+        
+        public init(_ value: Int) {
+            self = ConditionKey.customized(value: value)
         }
     }
 }

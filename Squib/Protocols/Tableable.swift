@@ -33,17 +33,6 @@ extension Tableable {
         }
     }
     
-    public static var conditionDictionary: [UInt: Condition] {
-        get {
-            return Storehouse.shared.getItem(Self.self, "Tableable-conditionDictionary") {
-                return [:]
-            }
-        }
-        set {
-            Storehouse.shared.setItem(Self.self, "Tableable-conditionDictionary", item: newValue)
-        }
-    }
-    
     public static var columnDictionary: [Powder.ColumnKey: [Address.Column]] {
         get {
             let allColumns = detailTableInfo.columnDescriptions.map{$0.name}
@@ -74,6 +63,17 @@ extension Tableable {
         }
         set {
             Storehouse.shared.setItem(Self.self, "Tableable-columnDictionary", item: newValue)
+        }
+    }
+    
+    public static var conditionDictionary: [Powder.ConditionKey: Condition] {
+        get {
+            return Storehouse.shared.getItem(Self.self, "Tableable-columnDictionary") {
+                return [:]
+            }
+        }
+        set {
+            Storehouse.shared.setItem(Self.self, "Tableable-conditionDictionary", item: newValue)
         }
     }
 }
