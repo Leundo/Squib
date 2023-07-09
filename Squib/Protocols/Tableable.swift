@@ -81,19 +81,6 @@ extension Tableable {
 
 public protocol Explosive: Tableable, Reflectable, Rebuildable {}
 
-// MARK: - Key
-// Move to Powder
-//public enum ColumnKey: Hashable {
-//    case primary
-//    case notPrimary
-//    case tableUnique
-//    case notTableUnique
-//    case customized(value: Int)
-//
-//    public init(_ value: Int) {
-//        self = ColumnKey.customized(value: value)
-//    }
-//}
 
 
 // MARK: - TableInfo

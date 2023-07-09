@@ -45,6 +45,7 @@
 		718DCD432A57E9D7005D4414 /* Connection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 718DCD422A57E9D7005D4414 /* Connection.swift */; };
 		718DCD452A57EC7E005D4414 /* SquibError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 718DCD442A57EC7E005D4414 /* SquibError.swift */; };
 		7191DC302A5A4DB200113E60 /* OverallTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7191DC2F2A5A4DB200113E60 /* OverallTest.swift */; };
+		7191DC322A5A811200113E60 /* DateIntergerFlexible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7191DC312A5A811200113E60 /* DateIntergerFlexible.swift */; };
 		71AC8B512A5950BA0038811B /* Reflectable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71AC8B502A5950BA0038811B /* Reflectable.swift */; };
 		71AC8B532A5952E20038811B /* Phantom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71AC8B522A5952E20038811B /* Phantom.swift */; };
 		71AC8B552A595A5F0038811B /* Rebuildable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71AC8B542A595A5F0038811B /* Rebuildable.swift */; };
@@ -100,6 +101,7 @@
 		718DCD422A57E9D7005D4414 /* Connection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Connection.swift; sourceTree = "<group>"; };
 		718DCD442A57EC7E005D4414 /* SquibError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SquibError.swift; sourceTree = "<group>"; };
 		7191DC2F2A5A4DB200113E60 /* OverallTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverallTest.swift; sourceTree = "<group>"; };
+		7191DC312A5A811200113E60 /* DateIntergerFlexible.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateIntergerFlexible.swift; sourceTree = "<group>"; };
 		71AC8B502A5950BA0038811B /* Reflectable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reflectable.swift; sourceTree = "<group>"; };
 		71AC8B522A5952E20038811B /* Phantom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Phantom.swift; sourceTree = "<group>"; };
 		71AC8B542A595A5F0038811B /* Rebuildable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rebuildable.swift; sourceTree = "<group>"; };
@@ -170,6 +172,7 @@
 				7179DA4C2A59CAE900F883DB /* JSONUtfCodable.swift */,
 				7179DA4E2A59CB0C00F883DB /* JSONDataCodable.swift */,
 				7179DA502A59CB3700F883DB /* AESEncryptable.swift */,
+				7191DC312A5A811200113E60 /* DateIntergerFlexible.swift */,
 				7125C58E2A58F44300BBEDE3 /* Columnable.swift */,
 			);
 			path = Wrappers;
@@ -410,6 +413,7 @@
 				718DCD392A57DBAA005D4414 /* Knife.swift in Sources */,
 				7179DA4F2A59CB0C00F883DB /* JSONDataCodable.swift in Sources */,
 				718DCD3D2A57E7ED005D4414 /* Constant.swift in Sources */,
+				7191DC322A5A811200113E60 /* DateIntergerFlexible.swift in Sources */,
 				7125C5712A5853E600BBEDE3 /* Storable.swift in Sources */,
 				7179DA4B2A59CAC200F883DB /* JSONSerializable.swift in Sources */,
 				71AC8B552A595A5F0038811B /* Rebuildable.swift in Sources */,

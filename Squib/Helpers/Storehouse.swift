@@ -32,7 +32,7 @@ internal class Storehouse {
     
     private init() {}
     
-    func getItem<T>(_ base: Any.Type, _ signature: String, initialize: () -> T) -> T {
+    internal func getItem<T>(_ base: Any.Type, _ signature: String, initialize: () -> T) -> T {
         let key = Key(base, signature)
         if let item = storedItems[key] {
             return item as! T
@@ -42,11 +42,11 @@ internal class Storehouse {
         return item
     }
     
-    func setItem(_ base: Any.Type, _ signature: String, item: Any) {
+    internal func setItem(_ base: Any.Type, _ signature: String, item: Any) {
         storedItems[Key(base, signature)] = item
     }
     
-    func getPhantom<T>(_ base: Any.Type, initialize: () -> T) -> T {
+    internal func getPhantom<T>(_ base: Any.Type, initialize: () -> T) -> T {
         let key = ObjectIdentifier(base)
         if let phantom = storedPhantoms[key] {
             return phantom as! T
@@ -63,7 +63,7 @@ extension Storehouse {
         fileprivate var metatype: HashableMetatype
         fileprivate var signature: String
         
-        init(_ type: Any.Type, _ signature: String) {
+        fileprivate init(_ type: Any.Type, _ signature: String) {
             self.metatype = HashableMetatype(type)
             self.signature = signature
         }

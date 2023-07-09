@@ -33,7 +33,7 @@ public struct Columnable<Value: Fluctuating>: ColumnableBridge {
 }
 
 
-protocol ColumnableBridge {
+internal protocol ColumnableBridge {
     var constraint: Constraint.Column { get }
     var name: String { get }
     var valueType: Any.Type { get }
