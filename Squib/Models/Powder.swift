@@ -47,8 +47,15 @@ extension Powder {
         return try Array<T>.from(retrievedRows, columns)
     }
     
-    public func naturallyQuery<T: Tableable & Rebuildable>(_ C: T.Type, _ Ds: [Any.Type], limitation: Limitation? = nil) throws {
+    public func naturallyQuery<T: Tableable & Rebuildable>(_ C: T.Type, _ Ds: [Any.Type], limitation: Limitation? = nil) throws -> [T] {
         let tableAndColumns = Ds.compactMap{ $0 as? Tableable.Type }.map{ ($0.tableInfo.table, $0.detailTableInfo.columns)}
-        print(Compiler.query(tables: tableAndColumns.map{$0.0}, columns: tableAndColumns.map{$0.1}.joined(), join: .natural, limitation: limitation, environment: connection.alias))
+        let columns = tableAndColumns.map{$0.1}.joined()
+        let targetColumns = T.detailTableInfo.columns
+        let rebuildColumns = columns.map { column in
+            return targetColumns.first(where: {$0.name == column.name})?.name
+        }
+        let retrievedRows = try Statement(connection, Compiler.query(tables: [T.tableInfo.table], columns: targetColumns, limitation: limitation, environment: connection.alias)).retrieve()
+        return try Array<T>.from(retrievedRows, rebuildColumns)
+//        print(Compiler.query(tables: tableAndColumns.map{$0.0}, columns: columns, join: .natural, limitation: limitation, environment: connection.alias))
     }
 }

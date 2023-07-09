@@ -11,12 +11,12 @@ import Runtime
 
 // MARK: - BasicallyRebuildable
 public protocol BasicallyRebuildable {
-    static func from(_ values: any Sequence<((any Storable)?, String)>, _ stencil: Self?) throws -> Self
+    static func from(_ values: any Sequence<((any Storable)?, String?)>, _ stencil: Self?) throws -> Self
 }
 
 
 extension BasicallyRebuildable {
-    static func from<Sequence1: Sequence<(any Storable)?>, Sequence2: Sequence<String>>(_ values: Sequence1, _ columns: Sequence2, _ stencil: Self? = nil) throws -> Self {
+    static func from<Sequence1: Sequence<(any Storable)?>, Sequence2: Sequence<String?>>(_ values: Sequence1, _ columns: Sequence2, _ stencil: Self? = nil) throws -> Self {
         return try from(zip(values, columns), stencil)
     }
     
@@ -27,11 +27,11 @@ extension BasicallyRebuildable {
 
 
 extension Sequence where Element: BasicallyRebuildable {
-    static func from(_ values: any Sequence<any Sequence<((any Storable)?, String)>>, _ stencil: Self.Element? = nil) throws -> Array<Element> {
+    static func from(_ values: any Sequence<any Sequence<((any Storable)?, String?)>>, _ stencil: Self.Element? = nil) throws -> Array<Element> {
         return try values.map {try Element.from($0, stencil)}
     }
     
-    static func from<Sequence1: Sequence<(any Storable)?>, Sequence2: Sequence<String>>(_ values: some Sequence<Sequence1>, _ columns: Sequence2, _ stencil: Self.Element? = nil) throws -> Array<Element> {
+    static func from<Sequence1: Sequence<(any Storable)?>, Sequence2: Sequence<String?>>(_ values: some Sequence<Sequence1>, _ columns: Sequence2, _ stencil: Self.Element? = nil) throws -> Array<Element> {
         return try values.map{ try Element.from($0, columns, stencil) }
     }
     
@@ -46,7 +46,7 @@ public protocol Rebuildable: BasicallyRebuildable, Phantom {}
 
 
 extension Rebuildable {
-    static func from(_ values: any Sequence<((any Storable)?, String)>, _ stencil: Self? = nil) throws -> Self {
+    static func from(_ values: any Sequence<((any Storable)?, String?)>, _ stencil: Self? = nil) throws -> Self {
         var building: Self
         if stencil != nil {
             building = stencil!

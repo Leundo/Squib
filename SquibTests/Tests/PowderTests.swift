@@ -34,7 +34,7 @@ final class PowderTests: XCTestCase {
     }
     
     func testNaturallyQuerying() throws {
-        try acquiredPowder.naturallyQuery(Foo.self, [Foo.self, Book.self])
+        print(try acquiredPowder.naturallyQuery(Foo.self, [Foo.self, Book.self]))
     }
 }
 
