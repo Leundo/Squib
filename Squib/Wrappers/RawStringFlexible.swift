@@ -79,3 +79,39 @@ public struct RawStringFlexible<WrappedValue: RawRepresentable>: Fluctuating, St
 
 extension RawStringFlexible: Equatable where WrappedValue: Equatable {}
 extension RawStringFlexible: Hashable where WrappedValue: Hashable {}
+
+
+@propertyWrapper
+public struct RawBinaryIntegerFlexible<WrappedValue: RawRepresentable>: Fluctuating, Int64Bindable where WrappedValue.RawValue: BinaryInteger {
+    // https://developer.apple.com/documentation/swift/binaryinteger
+    public var wrappedValue: WrappedValue
+    
+    public init(wrappedValue value: WrappedValue) {
+        self.wrappedValue = value
+    }
+    
+    public var storedValue: Int64? {
+        return Int64(wrappedValue.rawValue)
+    }
+    
+    public static func from(_ storableValue: (any Storable)?) throws -> RawBinaryIntegerFlexible {
+        switch storableValue {
+        case .none:
+            throw SquibError.plasticError(storableValue: storableValue)
+        case let storableValue as Int64:
+            if let value = WrappedValue(rawValue: WrappedValue.RawValue(storableValue)) {
+                return RawBinaryIntegerFlexible(wrappedValue: value)
+            }
+            throw SquibError.plasticError(storableValue: storableValue)
+        case .some(let storableValue):
+            throw SquibError.plasticError(storableValue: storableValue)
+        }
+    }
+    
+    public var incantation: String {
+        return storedValue.incantation
+    }
+}
+
+extension RawBinaryIntegerFlexible: Equatable where WrappedValue: Equatable {}
+extension RawBinaryIntegerFlexible: Hashable where WrappedValue: Hashable {}
