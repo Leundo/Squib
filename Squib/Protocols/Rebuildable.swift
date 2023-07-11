@@ -9,13 +9,13 @@ import Foundation
 import Runtime
 
 
-// MARK: - BasicallyRebuildable
-public protocol BasicallyRebuildable {
+// MARK: - BasicRebuildable
+public protocol BasicRebuildable {
     static func from(_ values: any Sequence<((any Storable)?, String?)>, _ stencil: Self?) throws -> Self
 }
 
 
-extension BasicallyRebuildable {
+extension BasicRebuildable {
     public static func from<Sequence1: Sequence<(any Storable)?>, Sequence2: Sequence<String?>>(_ values: Sequence1, _ columns: Sequence2, _ stencil: Self? = nil) throws -> Self {
         return try from(zip(values, columns), stencil)
     }
@@ -26,7 +26,7 @@ extension BasicallyRebuildable {
 }
 
 
-extension Sequence where Element: BasicallyRebuildable {
+extension Sequence where Element: BasicRebuildable {
     public static func from(_ values: any Sequence<any Sequence<((any Storable)?, String?)>>, _ stencil: Self.Element? = nil) throws -> Array<Element> {
         return try values.map {try Element.from($0, stencil)}
     }
@@ -42,7 +42,7 @@ extension Sequence where Element: BasicallyRebuildable {
 
 
 // MARK: - Rebuildable
-public protocol Rebuildable: BasicallyRebuildable, Phantom {}
+public protocol Rebuildable: BasicRebuildable, Phantom {}
 
 
 extension Rebuildable {

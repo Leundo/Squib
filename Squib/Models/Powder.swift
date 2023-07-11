@@ -46,13 +46,13 @@ extension Powder {
 
 // MARK: - Query
 extension Powder {
-    public func query<T: Tableable & Rebuildable>(_ C: T.Type, condition: Condition? = nil, limitation: Limitation? = nil) throws -> [T] {
+    public func query<T: Tableable & BasicRebuildable>(_ C: T.Type, condition: Condition? = nil, limitation: Limitation? = nil) throws -> [T] {
         let columns = T.detailTableInfo.columns
         let retrievedRows = try Statement(connection, Compiler.query(tables: [T.tableInfo.table], columns: columns, condition: condition, limitation: limitation, environment: connection.alias)).retrieve()
         return try Array<T>.from(retrievedRows, columns)
     }
     
-    public func naturallyQuery<T: Tableable & Rebuildable>(_ C: T.Type, _ Ds: [Any.Type], condition: Condition? = nil, limitation: Limitation? = nil) throws -> [T] {
+    public func naturallyQuery<T: Tableable & BasicRebuildable>(_ C: T.Type, _ Ds: [Any.Type], condition: Condition? = nil, limitation: Limitation? = nil) throws -> [T] {
         let tableAndColumns = Ds.compactMap{ $0 as? Tableable.Type }.map{ ($0.tableInfo.table, $0.detailTableInfo.columns)}
         let columns = tableAndColumns.map{$0.1}.joined()
         let targetColumns = T.detailTableInfo.columns
@@ -67,13 +67,13 @@ extension Powder {
 
 // MARK: - Replace & Delete
 extension Powder {
-    public func replace<T: Tableable & Reflectable>(_ object: T, _ key: ColumnKey = .notPrimary) throws {
+    public func replace<T: Tableable & BasicReflectable>(_ object: T, _ key: ColumnKey = .notPrimary) throws {
         let columns = T.columnDictionary[key]!
         try Statement(connection, Compiler.replace(table: T.detailTableInfo.table, columns: columns, environment: connection.alias)).run(object.getReflectedValues(columns))
     }
     
     
-    public func replace<T: Tableable & Reflectable, Sequence1: Sequence<T>>(_ objects: Sequence1, _ key: ColumnKey = .notPrimary) throws {
+    public func replace<T: Tableable & BasicReflectable, Sequence1: Sequence<T>>(_ objects: Sequence1, _ key: ColumnKey = .notPrimary) throws {
         let columns = T.columnDictionary[key]!
         let statement = try Statement(connection, Compiler.replace(table: T.tableInfo.table, columns: columns, environment: connection.alias))
         for object in objects {
@@ -82,14 +82,14 @@ extension Powder {
     }
     
     
-    public func delete<T: Tableable & Reflectable>(_ object: T, _ key: ColumnKey = .primary) throws {
+    public func delete<T: Tableable & BasicReflectable>(_ object: T, _ key: ColumnKey = .primary) throws {
         let columns = T.columnDictionary[key]!
         let condition = ArrayLikeParallelCondition(columns: columns).bind(object.getReflectedValues(columns))
         try Statement(connection, Compiler.delete(table: T.tableInfo.table, condition: condition, environment: connection.alias)).run()
     }
     
     
-    public func delete<T: Tableable & Reflectable, Sequence1: Sequence<T>>(_ objects: Sequence1, _ key: ColumnKey = .primary) throws {
+    public func delete<T: Tableable & BasicReflectable, Sequence1: Sequence<T>>(_ objects: Sequence1, _ key: ColumnKey = .primary) throws {
         let columns = T.columnDictionary[key]!
         let condition = ArrayLikeParallelCondition(columns: columns)
         for object in objects {
@@ -101,25 +101,25 @@ extension Powder {
 
 // MARK: - Update
 extension Powder {
-    public func update<T: Tableable & Reflectable>(_ object: T, _ key: ColumnKey = .notPrimary, condition: Condition) throws {
+    public func update<T: Tableable & BasicReflectable>(_ object: T, _ key: ColumnKey = .notPrimary, condition: Condition) throws {
         let columns = T.columnDictionary[key]!
         try Statement(connection, Compiler.update(table: T.tableInfo.table, columns: columns, condition: condition, environment: connection.alias)).run(object.getReflectedValues(columns))
     }
     
-    public func update<T: Tableable & Reflectable, Sequence1: Sequence<T>>(_ objects: Sequence1, _ key: ColumnKey = .notPrimary, condition: Condition) throws {
+    public func update<T: Tableable & BasicReflectable, Sequence1: Sequence<T>>(_ objects: Sequence1, _ key: ColumnKey = .notPrimary, condition: Condition) throws {
         let columns = T.columnDictionary[key]!
         for object in objects {
             try Statement(connection, Compiler.update(table: T.tableInfo.table, columns: columns, condition: condition, environment: connection.alias)).run(object.getReflectedValues(columns))
         }
     }
     
-    public func update<T: Tableable & Reflectable>(_ object: T, _ key: ColumnKey = .notPrimary, conditionKey: ConditionKey, conditionColumnKey: ColumnKey? = nil) throws {
+    public func update<T: Tableable & BasicReflectable>(_ object: T, _ key: ColumnKey = .notPrimary, conditionKey: ConditionKey, conditionColumnKey: ColumnKey? = nil) throws {
         let columns = T.columnDictionary[key]!
         var conditionColumns: [Address.Column]? = nil
         if let conditionColumnKey = conditionColumnKey {
             conditionColumns = T.columnDictionary[conditionColumnKey]!
         }
-        var condition: Condition = T.conditionDictionary[conditionKey]!
+        let condition: Condition = T.conditionDictionary[conditionKey]!
         if let conditionColumns = conditionColumns {
             condition.bind(object.getReflectedValues(conditionColumns))
         } else {
@@ -128,13 +128,13 @@ extension Powder {
         try Statement(connection, Compiler.update(table: T.tableInfo.table, columns: columns, condition: condition, environment: connection.alias)).run(object.getReflectedValues(columns))
     }
     
-    public func update<T: Tableable & Reflectable, Sequence1: Sequence<T>>(_ objects: Sequence1, _ key: ColumnKey = .notPrimary, conditionKey: ConditionKey, conditionColumnKey: ColumnKey? = nil) throws {
+    public func update<T: Tableable & BasicReflectable, Sequence1: Sequence<T>>(_ objects: Sequence1, _ key: ColumnKey = .notPrimary, conditionKey: ConditionKey, conditionColumnKey: ColumnKey? = nil) throws {
         let columns = T.columnDictionary[key]!
         var conditionColumns: [Address.Column]? = nil
         if let conditionColumnKey = conditionColumnKey {
             conditionColumns = T.columnDictionary[conditionColumnKey]!
         }
-        var condition: Condition = T.conditionDictionary[conditionKey]!
+        let condition: Condition = T.conditionDictionary[conditionKey]!
         if let conditionColumns = conditionColumns {
             for object in objects {
                 try Statement(connection, Compiler.update(table: T.tableInfo.table, columns: columns, condition: condition.bind(object.getReflectedValues(conditionColumns)), environment: connection.alias)).run(object.getReflectedValues(columns))
@@ -146,14 +146,14 @@ extension Powder {
         }
     }
     
-    public func update<T: Tableable & Reflectable>(_ object: T, _ key: ColumnKey = .notPrimary, conditionColumnKey: ColumnKey = .primary, comparator: Condition.Comparator = .equal) throws {
+    public func update<T: Tableable & BasicReflectable>(_ object: T, _ key: ColumnKey = .notPrimary, conditionColumnKey: ColumnKey = .primary, comparator: Condition.Comparator = .equal) throws {
         let columns = T.columnDictionary[key]!
         let conditionColumns = T.columnDictionary[conditionColumnKey]!
         let condition = ArrayLikeParallelCondition(columns: conditionColumns, comparator).bind(object.getReflectedValues(conditionColumns))
         try Statement(connection, Compiler.update(table: T.tableInfo.table, columns: columns, condition: condition, environment: connection.alias)).run(object.getReflectedValues(columns))
     }
     
-    public func update<T: Tableable & Reflectable, Sequence1: Sequence<T>>(_ objects: Sequence1, _ key: ColumnKey = .notPrimary, conditionColumnKey: ColumnKey = .primary, comparator: Condition.Comparator = .equal) throws {
+    public func update<T: Tableable & BasicReflectable, Sequence1: Sequence<T>>(_ objects: Sequence1, _ key: ColumnKey = .notPrimary, conditionColumnKey: ColumnKey = .primary, comparator: Condition.Comparator = .equal) throws {
         let columns = T.columnDictionary[key]!
         let conditionColumns = T.columnDictionary[conditionColumnKey]!
         let condition = ArrayLikeParallelCondition(columns: conditionColumns, comparator)

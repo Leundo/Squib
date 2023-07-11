@@ -12,7 +12,7 @@ public struct Limitation: Expressive {
     public var number: Int
     public var offset: Int?
     
-    init(number: Int, offset: Int? = nil) {
+    public init(number: Int, offset: Int? = nil) {
         self.number = number
         self.offset = offset
     }

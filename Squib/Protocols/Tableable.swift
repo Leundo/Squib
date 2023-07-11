@@ -79,6 +79,7 @@ extension Tableable {
 }
 
 
+public protocol BasicExplosive: Tableable, BasicReflectable, BasicRebuildable {}
 public protocol Explosive: Tableable, Reflectable, Rebuildable {}
 
 
