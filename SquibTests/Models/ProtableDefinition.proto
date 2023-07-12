@@ -1,0 +1,25 @@
+syntax = "proto3";
+
+
+message ProtablePronunciation {
+   string symbol = 1;
+   sint32 tone = 2;
+}
+
+message ProtableParagraph {
+   sint32 language = 1;
+   string epitome = 2;
+   repeated string detail = 3;
+}
+
+message ProtableParagraphGroup {
+   repeated ProtableParagraph protableParagraph = 1;
+}
+
+message ProtableDefinition {
+   sfixed64 hinshiSet = 1;
+   ProtablePronunciation pronunciation = 2;
+   ProtableParagraphGroup meanings = 3;
+   ProtableParagraphGroup examples = 4;
+   ProtableDefinition subDefinitions = 5;
+}

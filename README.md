@@ -29,3 +29,7 @@ struct Article: Explosive, Hashable {
 }
 ```
 
+## Dependencies
+
+1. [Runtime](https://github.com/wickwirew/Runtime)
+2. [SwiftProtobuf](https://github.com/apple/swift-protobuf)

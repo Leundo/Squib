@@ -51,6 +51,12 @@
 		71AC8B532A5952E20038811B /* Phantom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71AC8B522A5952E20038811B /* Phantom.swift */; };
 		71AC8B552A595A5F0038811B /* Rebuildable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71AC8B542A595A5F0038811B /* Rebuildable.swift */; };
 		71AC8B572A597CFC0038811B /* FluctuatingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71AC8B562A597CFC0038811B /* FluctuatingTests.swift */; };
+		71EC5CC12A5E3D9B006BA938 /* SwiftProtobuf in Frameworks */ = {isa = PBXBuildFile; productRef = 71EC5CC02A5E3D9B006BA938 /* SwiftProtobuf */; };
+		71EC5CC32A5E3E06006BA938 /* ProtableEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71EC5CC22A5E3E06006BA938 /* ProtableEntry.swift */; };
+		71EC5CC62A5E4429006BA938 /* ProtableDefinition.proto in Sources */ = {isa = PBXBuildFile; fileRef = 71EC5CC42A5E4429006BA938 /* ProtableDefinition.proto */; };
+		71EC5CC72A5E4429006BA938 /* ProtableDefinition.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71EC5CC52A5E4429006BA938 /* ProtableDefinition.pb.swift */; };
+		71EC5CC92A5E443E006BA938 /* ProtoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71EC5CC82A5E443E006BA938 /* ProtoTests.swift */; };
+		71EC5CCB2A5E4826006BA938 /* ProtoBufCodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71EC5CCA2A5E4826006BA938 /* ProtoBufCodable.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -108,6 +114,11 @@
 		71AC8B522A5952E20038811B /* Phantom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Phantom.swift; sourceTree = "<group>"; };
 		71AC8B542A595A5F0038811B /* Rebuildable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rebuildable.swift; sourceTree = "<group>"; };
 		71AC8B562A597CFC0038811B /* FluctuatingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FluctuatingTests.swift; sourceTree = "<group>"; };
+		71EC5CC22A5E3E06006BA938 /* ProtableEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProtableEntry.swift; sourceTree = "<group>"; };
+		71EC5CC42A5E4429006BA938 /* ProtableDefinition.proto */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.protobuf; path = ProtableDefinition.proto; sourceTree = "<group>"; };
+		71EC5CC52A5E4429006BA938 /* ProtableDefinition.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProtableDefinition.pb.swift; sourceTree = "<group>"; };
+		71EC5CC82A5E443E006BA938 /* ProtoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProtoTests.swift; sourceTree = "<group>"; };
+		71EC5CCA2A5E4826006BA938 /* ProtoBufCodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProtoBufCodable.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -117,6 +128,7 @@
 			files = (
 				718DCD282A57CF90005D4414 /* libsqlite3.tbd in Frameworks */,
 				718DCD2B2A57CFBA005D4414 /* Runtime in Frameworks */,
+				71EC5CC12A5E3D9B006BA938 /* SwiftProtobuf in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -150,7 +162,10 @@
 		7125C5852A58DCE600BBEDE3 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				71EC5CC52A5E4429006BA938 /* ProtableDefinition.pb.swift */,
+				71EC5CC42A5E4429006BA938 /* ProtableDefinition.proto */,
 				7125C5862A58DD1E00BBEDE3 /* Book.swift */,
+				71EC5CC22A5E3E06006BA938 /* ProtableEntry.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -162,6 +177,7 @@
 				71AC8B562A597CFC0038811B /* FluctuatingTests.swift */,
 				7179DA582A5A32A100F883DB /* PowderTests.swift */,
 				7191DC2F2A5A4DB200113E60 /* OverallTest.swift */,
+				71EC5CC82A5E443E006BA938 /* ProtoTests.swift */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -173,6 +189,7 @@
 				7179DA4A2A59CAC200F883DB /* JSONSerializable.swift */,
 				7179DA4C2A59CAE900F883DB /* JSONUtfCodable.swift */,
 				7179DA4E2A59CB0C00F883DB /* JSONDataCodable.swift */,
+				71EC5CCA2A5E4826006BA938 /* ProtoBufCodable.swift */,
 				7179DA502A59CB3700F883DB /* AESEncryptable.swift */,
 				7191DC312A5A811200113E60 /* DateIntergerFlexible.swift */,
 				7191DC352A5A86BC00113E60 /* RawStringFlexible.swift */,
@@ -307,6 +324,7 @@
 			name = Squib;
 			packageProductDependencies = (
 				718DCD2A2A57CFBA005D4414 /* Runtime */,
+				71EC5CC02A5E3D9B006BA938 /* SwiftProtobuf */,
 			);
 			productName = Squib;
 			productReference = 718DCD0C2A57CD7C005D4414 /* Squib.framework */;
@@ -359,6 +377,7 @@
 			mainGroup = 718DCD022A57CD7C005D4414;
 			packageReferences = (
 				718DCD292A57CFBA005D4414 /* XCRemoteSwiftPackageReference "Runtime" */,
+				71EC5CBF2A5E3D9B006BA938 /* XCRemoteSwiftPackageReference "swift-protobuf" */,
 			);
 			productRefGroup = 718DCD0D2A57CD7C005D4414 /* Products */;
 			projectDirPath = "";
@@ -419,6 +438,7 @@
 				718DCD3D2A57E7ED005D4414 /* Constant.swift in Sources */,
 				7191DC322A5A811200113E60 /* DateIntergerFlexible.swift in Sources */,
 				7125C5712A5853E600BBEDE3 /* Storable.swift in Sources */,
+				71EC5CCB2A5E4826006BA938 /* ProtoBufCodable.swift in Sources */,
 				7179DA4B2A59CAC200F883DB /* JSONSerializable.swift in Sources */,
 				71AC8B552A595A5F0038811B /* Rebuildable.swift in Sources */,
 				7125C5802A587C7900BBEDE3 /* Limitation.swift in Sources */,
@@ -434,10 +454,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				71EC5CC72A5E4429006BA938 /* ProtableDefinition.pb.swift in Sources */,
+				71EC5CC62A5E4429006BA938 /* ProtableDefinition.proto in Sources */,
+				71EC5CC32A5E3E06006BA938 /* ProtableEntry.swift in Sources */,
 				7179DA592A5A32A100F883DB /* PowderTests.swift in Sources */,
 				7125C5872A58DD1E00BBEDE3 /* Book.swift in Sources */,
 				7191DC302A5A4DB200113E60 /* OverallTest.swift in Sources */,
 				7125C5962A594E5300BBEDE3 /* CompilerTests.swift in Sources */,
+				71EC5CC92A5E443E006BA938 /* ProtoTests.swift in Sources */,
 				71AC8B572A597CFC0038811B /* FluctuatingTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -710,6 +734,14 @@
 				minimumVersion = 2.0.0;
 			};
 		};
+		71EC5CBF2A5E3D9B006BA938 /* XCRemoteSwiftPackageReference "swift-protobuf" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/apple/swift-protobuf.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -717,6 +749,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 718DCD292A57CFBA005D4414 /* XCRemoteSwiftPackageReference "Runtime" */;
 			productName = Runtime;
+		};
+		71EC5CC02A5E3D9B006BA938 /* SwiftProtobuf */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 71EC5CBF2A5E3D9B006BA938 /* XCRemoteSwiftPackageReference "swift-protobuf" */;
+			productName = SwiftProtobuf;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
