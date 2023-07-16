@@ -102,6 +102,12 @@ extension Condition {
         public var rhs: Canister
         public var sign: Comparator
         
+        init(lhs: Canister, rhs: Canister, sign: Comparator) {
+            self.lhs = lhs
+            self.rhs = rhs
+            self.sign = sign
+        }
+        
         public var incantation: String {
             return "\(lhs.incantation) \(sign.rawValue) \(rhs.incantation)"
         }
