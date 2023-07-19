@@ -49,6 +49,7 @@ extension Condition {
         case greaterThanOrEqual = ">="
         case lessThan = "<"
         case lessThanOrEqual = "<="
+        case inSet = "IN"
     }
     
     public enum Logic: String {
@@ -59,6 +60,7 @@ extension Condition {
     public enum Canister: Expressive {
         case column(payload: Address.Column)
         case value(payload: any Expressive)
+        case expression(payload: String)
         case placeholder(payload: any Expressive, isBound: Bool)
         
         public var incantation: String {
@@ -70,6 +72,8 @@ extension Condition {
                 return payload.incantation
             case let .column(payload):
                 return payload.incantation
+            case let .expression(payload):
+                return payload
             }
         }
         public func weave(_ environment: String?) -> String {
@@ -81,6 +85,8 @@ extension Condition {
                 return payload.incantation
             case let .column(payload):
                 return payload.weave(environment)
+            case let .expression(payload):
+                return payload
             }
         }
         public var isValue: Bool {
@@ -102,7 +108,7 @@ extension Condition {
         public var rhs: Canister
         public var sign: Comparator
         
-        init(lhs: Canister, rhs: Canister, sign: Comparator) {
+        public init(lhs: Canister, rhs: Canister, sign: Comparator) {
             self.lhs = lhs
             self.rhs = rhs
             self.sign = sign
@@ -184,7 +190,8 @@ public class ArrayLikeParallelCondition: ParallelCondition {
     }
     
     public init(columns: [Address.Column], _ comparator: Comparator = .equal, _ logic: Logic = .and) {
-        self._trios = columns.map { Trio(lhs: .placeholder(payload: "", isBound: false), rhs: .column(payload: $0), sign: comparator) }
+//        self._trios = columns.map { Trio(lhs: .placeholder(payload: "", isBound: false), rhs: .column(payload: $0), sign: comparator) }
+        self._trios = columns.map { Trio(lhs: .column(payload: $0), rhs: .placeholder(payload: "", isBound: false), sign: comparator) }
         super.init(logic: logic)
     }
     

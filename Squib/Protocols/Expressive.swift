@@ -48,3 +48,20 @@ extension Optional: Expressive where Wrapped: Expressive {
         return "NULL"
     }
 }
+
+
+public struct SQLExpression: Expressive {
+    fileprivate var sql: String
+    public var incantation: String { return sql }
+    
+    public init(_ value: String) {
+        self.sql = value
+    }
+}
+
+
+extension String {
+    public init(_ sqlExpression: SQLExpression) {
+        self = sqlExpression.sql
+    }
+}

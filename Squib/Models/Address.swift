@@ -60,6 +60,8 @@ extension Address {
         public func weave(_ environment: String?) -> String {
             if let environment = environment, let connection = connection, environment == connection {
                 return name.quote()
+            } else if environment == nil {
+                return name.quote()
             }
             return incantation
         }

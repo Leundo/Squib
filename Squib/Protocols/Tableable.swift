@@ -114,6 +114,10 @@ public class DetailTableInfo: TableInfo {
     public func getColumnAddresses(_ names: [String]) -> [Address.Column] {
         return columns.filter { names.contains($0.name) }
     }
+    
+    public func getColumnAddress(_ name: String) -> Address.Column? {
+        return columns.first(where: {$0.name == name})
+    }
 }
 
 
