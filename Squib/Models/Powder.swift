@@ -44,6 +44,18 @@ extension Powder {
 }
 
 
+// MARK: - Transaction
+extension Powder {
+    public func begin() throws {
+        try execute(Compiler.begin())
+    }
+    
+    public func commit() throws {
+        try execute(Compiler.commit())
+    }
+}
+
+
 // MARK: - Query
 extension Powder {
     public func query<T: Tableable & BasicRebuildable>(_ C: T.Type, condition: Condition? = nil, limitation: Limitation? = nil) throws -> [T] {
