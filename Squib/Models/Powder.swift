@@ -95,6 +95,10 @@ extension Powder {
     }
     
     
+    public func delete<T: Tableable>(_ C: T.Type, condition: Condition) throws {
+        try Statement(connection, Compiler.delete(table: T.tableInfo.table, condition: condition, environment: connection.alias)).run()
+    }
+    
     public func delete<T: Tableable & BasicReflectable>(_ object: T, _ key: ColumnKey = .primary) throws {
         let columns = T.columnDictionary[key]!
         let condition = ArrayLikeParallelCondition(columns: columns).bind(object.getReflectedValues(columns))

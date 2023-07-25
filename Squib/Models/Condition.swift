@@ -15,6 +15,9 @@ public class Condition: Expressive {
     fileprivate func weaveWithoutHead(_ environment: String?) -> String {
         fatalError("weave has not been implemented")
     }
+    fileprivate var placeholderCount: Int {
+        fatalError("placeholderCount has not been implemented")
+    }
     public var incantation: String {
         if incantationWithoutHead.trimmingCharacters(in: .whitespacesAndNewlines) == "" {
             return ""
@@ -149,29 +152,50 @@ public class ParallelCondition: Condition {
 }
 
 
+// MARK: - ParallelBagCondition
 public class ParallelBagCondition: Condition {
     public var logic: Logic
     public var condtions: [Condition]
     
-    init(condtions: [Condition], _ logic: Logic = .and) {
+    public override var placeholderCount: Int { return _placeholderCount }
+    private lazy var _placeholderCount: Int = {
+        return condtions.map { $0.placeholderCount }.reduce(0, +)
+    }()
+    
+    public init(condtions: [Condition], _ logic: Logic = .and) {
         self.condtions = condtions
         self.logic = logic
     }
+    
     fileprivate override var incantationWithoutHead: String {
         if condtions.count > 0 {
             return "(" + Knife.concat(condtions.map {$0.incantationWithoutHead}, delimiter: logic.rawValue) + ")"
         }
         return ""
     }
+    
     fileprivate override func weaveWithoutHead(_ environment: String?) -> String {
         if condtions.count > 0 {
             return "(" + Knife.concat(condtions.map {$0.weaveWithoutHead(environment)}, delimiter: logic.rawValue) + ")"
         }
         return ""
     }
+    
+    public override func bind(_ values: [(any Expressive)?]) -> Condition {
+        if values.count != _placeholderCount {
+            fatalError("there are \(_placeholderCount) placeholder in condition, but \(values.count) in argument")
+        }
+        var counter = 0
+        for index in 0..<condtions.count {
+            condtions[index].bind(Array(values[counter..<counter+condtions[index].placeholderCount]))
+            counter += condtions[index].placeholderCount
+        }
+        return self
+    }
 }
 
 
+// MARK: - ArrayLikeParallelCondition
 public class ArrayLikeParallelCondition: ParallelCondition {
     public override var trios: [Trio] { return _trios }
     private var _trios: [Trio]
@@ -179,7 +203,8 @@ public class ArrayLikeParallelCondition: ParallelCondition {
     private lazy var valueCount: Int = {
         return trios.map { ($0.lhs.isValue ? 1 : 0) + ($0.rhs.isValue ? 1 : 0) }.reduce(0, +)
     }()
-    private lazy var placeholderCount: Int = {
+    public override var placeholderCount: Int { return _placeholderCount }
+    private lazy var _placeholderCount: Int = {
         return trios.map { ($0.lhs.isPlaceholder ? 1 : 0) + ($0.rhs.isPlaceholder ? 1 : 0) }.reduce(0, +)
     }()
     
@@ -196,8 +221,8 @@ public class ArrayLikeParallelCondition: ParallelCondition {
     }
     
     public override func bind(_ values: [(any Expressive)?]) -> Condition {
-        if values.count != placeholderCount {
-            fatalError("there are \(placeholderCount) placeholder in condition, but \(values.count) in argument")
+        if values.count != _placeholderCount {
+            fatalError("there are \(_placeholderCount) placeholder in condition, but \(values.count) in argument")
         }
         var index = 0
         for group in 0..<_trios.count {
