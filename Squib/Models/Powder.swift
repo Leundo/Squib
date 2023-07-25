@@ -66,12 +66,13 @@ extension Powder {
     
     public func naturallyQuery<T: Tableable & BasicRebuildable>(_ C: T.Type, _ Ds: [Any.Type], condition: Condition? = nil, limitation: Limitation? = nil) throws -> [T] {
         let tableAndColumns = Ds.compactMap{ $0 as? Tableable.Type }.map{ ($0.tableInfo.table, $0.detailTableInfo.columns)}
+        let tables = tableAndColumns.map{$0.0}
         let columns = tableAndColumns.map{$0.1}.joined()
         let targetColumns = T.detailTableInfo.columns
         let rebuildColumns = columns.map { column in
             return targetColumns.first(where: {$0.name == column.name})?.name
         }
-        let retrievedRows = try Statement(connection, Compiler.query(tables: [T.tableInfo.table], columns: targetColumns, condition: condition, limitation: limitation, environment: connection.alias)).retrieve()
+        let retrievedRows = try Statement(connection, Compiler.query(tables: tables, columns: columns, join: .natural, condition: condition, limitation: limitation, environment: connection.alias)).retrieve()
         return try Array<T>.from(retrievedRows, rebuildColumns)
     }
 }
