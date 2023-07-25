@@ -34,7 +34,7 @@ public class Condition: Expressive {
     @discardableResult public func bind(_ values: ((any Expressive)?)...) -> Condition {
         return bind(values)
     }
-    @discardableResult public func bind(_ values: [(any Expressive)?]) -> Condition {
+    @discardableResult public func bind<Collection1: Collection<(any Expressive)?>>(_ values: Collection1) -> Condition {
 //        if values.isEmpty { return self }
         fatalError("bind has not been implemented")
     }
@@ -181,13 +181,14 @@ public class ParallelBagCondition: Condition {
         return ""
     }
     
-    public override func bind(_ values: [(any Expressive)?]) -> Condition {
+    public override func bind<Collection1: Collection<(any Expressive)?>>(_ values: Collection1) -> Condition {
         if values.count != _placeholderCount {
             fatalError("there are \(_placeholderCount) placeholder in condition, but \(values.count) in argument")
         }
         var counter = 0
+        let startIndex = values.startIndex
         for index in 0..<condtions.count {
-            condtions[index].bind(Array(values[counter..<counter+condtions[index].placeholderCount]))
+            condtions[index].bind(values[values.index(startIndex, offsetBy:counter)..<values.index(startIndex, offsetBy:counter+condtions[index].placeholderCount)])
             counter += condtions[index].placeholderCount
         }
         return self
@@ -220,23 +221,23 @@ public class ArrayLikeParallelCondition: ParallelCondition {
         super.init(logic: logic)
     }
     
-    public override func bind(_ values: [(any Expressive)?]) -> Condition {
+    public override func bind<Collection1: Collection<(any Expressive)?>>(_ values: Collection1) -> Condition {
         if values.count != _placeholderCount {
             fatalError("there are \(_placeholderCount) placeholder in condition, but \(values.count) in argument")
         }
-        var index = 0
+        var index = values.startIndex
         for group in 0..<_trios.count {
             if _trios[group].lhs.isPlaceholder {
                 if let value = values[index] {
                     _trios[group].lhs = .placeholder(payload: value, isBound: true)
                 }
-                index += 1
+                index = values.index(after: index)
             }
             if _trios[group].rhs.isPlaceholder {
                 if let value = values[index] {
                     _trios[group].rhs = .placeholder(payload: value, isBound: true)
                 }
-                index += 1
+                index = values.index(after: index)
             }
         }
         return self
