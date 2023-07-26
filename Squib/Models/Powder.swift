@@ -178,6 +178,10 @@ extension Powder {
             try Statement(connection, Compiler.update(table: T.tableInfo.table, columns: columns, condition: condition.bind(object.getReflectedValues(conditionColumns)), environment: connection.alias)).run(object.getReflectedValues(columns))
         }
     }
+    
+    public func update<T: Tableable & BasicReflectable>(_ object: T, columns: [Address.Column], condition: Condition) throws {
+        try Statement(connection, Compiler.update(table: T.tableInfo.table, columns: columns, condition: condition, environment: connection.alias)).run(object.getReflectedValues(columns))
+    }
 }
 
 
