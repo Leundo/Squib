@@ -118,6 +118,10 @@ extension Powder {
 
 // MARK: - Update
 extension Powder {
+    public func update<T: Tableable>(_ C: T.Type, columns: [Address.Column], valuesToUpdate: [(any Bindable)?], condition: Condition) throws {
+        try Statement(connection, Compiler.update(table: T.tableInfo.table, columns: columns, condition: condition, environment: connection.alias)).run(valuesToUpdate)
+    }
+    
     public func update<T: Tableable & BasicReflectable>(_ object: T, _ key: ColumnKey = .notPrimary, condition: Condition) throws {
         let columns = T.columnDictionary[key]!
         try Statement(connection, Compiler.update(table: T.tableInfo.table, columns: columns, condition: condition, environment: connection.alias)).run(object.getReflectedValues(columns))
@@ -165,6 +169,12 @@ extension Powder {
     
     public func update<T: Tableable & BasicReflectable>(_ object: T, _ key: ColumnKey = .notPrimary, conditionColumnKey: ColumnKey = .primary, comparator: Condition.Comparator = .equal) throws {
         let columns = T.columnDictionary[key]!
+        let conditionColumns = T.columnDictionary[conditionColumnKey]!
+        let condition = ArrayLikeParallelCondition(columns: conditionColumns, comparator).bind(object.getReflectedValues(conditionColumns))
+        try Statement(connection, Compiler.update(table: T.tableInfo.table, columns: columns, condition: condition, environment: connection.alias)).run(object.getReflectedValues(columns))
+    }
+    
+    public func update<T: Tableable & BasicReflectable>(_ object: T, columns: [Address.Column], conditionColumnKey: ColumnKey = .primary, comparator: Condition.Comparator = .equal) throws {
         let conditionColumns = T.columnDictionary[conditionColumnKey]!
         let condition = ArrayLikeParallelCondition(columns: conditionColumns, comparator).bind(object.getReflectedValues(conditionColumns))
         try Statement(connection, Compiler.update(table: T.tableInfo.table, columns: columns, condition: condition, environment: connection.alias)).run(object.getReflectedValues(columns))
