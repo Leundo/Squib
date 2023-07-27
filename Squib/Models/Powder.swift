@@ -80,13 +80,13 @@ extension Powder {
 
 // MARK: - Replace & Delete
 extension Powder {
-    public func replace<T: Tableable & BasicReflectable>(_ object: T, _ key: ColumnKey = .notPrimary) throws {
+    public func replace<T: Tableable & BasicReflectable>(_ object: T, _ key: ColumnKey) throws {
         let columns = T.columnDictionary[key]!
         try Statement(connection, Compiler.replace(table: T.detailTableInfo.table, columns: columns, environment: connection.alias)).run(object.getReflectedValues(columns))
     }
     
     
-    public func replace<T: Tableable & BasicReflectable, Sequence1: Sequence<T>>(_ objects: Sequence1, _ key: ColumnKey = .notPrimary) throws {
+    public func replace<T: Tableable & BasicReflectable, Sequence1: Sequence<T>>(_ objects: Sequence1, _ key: ColumnKey) throws {
         let columns = T.columnDictionary[key]!
         let statement = try Statement(connection, Compiler.replace(table: T.tableInfo.table, columns: columns, environment: connection.alias))
         for object in objects {
@@ -187,6 +187,7 @@ extension Powder {
 
 extension Powder {
     public enum ColumnKey: Hashable {
+        case all
         case primary
         case notPrimary
         case tableUnique

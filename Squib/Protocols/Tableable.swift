@@ -54,6 +54,7 @@ extension Tableable {
             }.joined())
             return Storehouse.shared.getItem(Self.self, "Tableable-columnDictionary") {
                 return [
+                    .all: detailTableInfo.getColumnAddresses(allColumns),
                     .primary: detailTableInfo.getColumnAddresses(primaryColumns),
                     .notPrimary: detailTableInfo.getColumnAddresses(allColumns.filter{!primaryColumns.contains($0)}),
                     .tableUnique: detailTableInfo.getColumnAddresses(tableUniqueColumns),
