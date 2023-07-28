@@ -34,6 +34,14 @@ extension Connection {
             try execute(sqls)
         }
     }
+    
+    public func close() throws {
+        try check(sqlite3_close(_handle))
+    }
+    
+    public func reopen() throws {
+        try check(sqlite3_open_v2(opening.description, &_handle, SQLITE_OPEN_READWRITE | SQLITE_OPEN_CREATE | SQLITE_OPEN_FULLMUTEX, nil))
+    }
 }
 
 

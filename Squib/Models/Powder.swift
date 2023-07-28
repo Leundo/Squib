@@ -15,6 +15,17 @@ public class Powder {
         self.connection = connection
     }
     
+    public func close() throws {
+        try connection.close()
+    }
+    
+    public func reconnect(_ connection: Connection) throws {
+        self.connection = connection
+    }
+    
+    public func reopen() throws {
+        try connection.reopen()
+    }
 }
 
 
