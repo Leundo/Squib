@@ -58,8 +58,8 @@ extension Powder {
 
 // MARK: - Query
 extension Powder {
-    public func query<T: Tableable & BasicRebuildable>(_ C: T.Type, condition: Condition? = nil, limitation: Limitation? = nil) throws -> [T] {
-        let columns = T.detailTableInfo.columns
+    public func query<T: Tableable & BasicRebuildable>(_ C: T.Type, _ columns: [Address.Column]? = nil, condition: Condition? = nil, limitation: Limitation? = nil) throws -> [T] {
+        let columns = columns ?? T.detailTableInfo.columns
         let retrievedRows = try Statement(connection, Compiler.query(tables: [T.tableInfo.table], columns: columns, condition: condition, limitation: limitation, environment: connection.alias)).retrieve()
         return try Array<T>.from(retrievedRows, columns)
     }
